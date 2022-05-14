@@ -3,4 +3,10 @@
     <string name="title_carts">Carts</string>
     <string name="title_search">Search</string>
     <string name="title_profile">Profile</string>
+    <string name="imagen_del_producto">imagen del producto</string>
+    <string name="imagen_del_supermercado">imagen del supermercado</string>
+    <string name="logo_de_comparacompra">Logo de ComparaCompra</string>
+    <string name="boton_para_camara">Boton para camara</string>
+    <string name="search">Search</string>
+    <string name="boton_de_busqueda">boton de busqueda</string>
 </resources>

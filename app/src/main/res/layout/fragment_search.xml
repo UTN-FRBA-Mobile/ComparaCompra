@@ -7,6 +7,7 @@
     tools:context=".ui.search.SearchFragment">
 
     <ImageView
+        android:contentDescription="@string/logo_de_comparacompra"
         android:id="@+id/imageViewLogo"
         android:layout_width="match_parent"
         android:layout_height="200dp"
@@ -35,22 +36,37 @@
         android:paddingRight="30dp">
 
         <ImageButton
+            android:contentDescription="@string/boton_para_camara"
+            android:id="@+id/camera_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_outline_camera_alt_24" />
 
         <EditText
+            android:inputType="text"
+            android:autofillHints="none"
             android:id="@+id/text_search"
-            android:hint="Search"
+            android:hint="@string/search"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
 
         <ImageButton
+            android:contentDescription="@string/boton_de_busqueda"
+            android:id="@+id/search_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_outline_search_24" />
 
     </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvProducts"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:layout_below="@id/search_bar"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"/>
 
 </RelativeLayout>

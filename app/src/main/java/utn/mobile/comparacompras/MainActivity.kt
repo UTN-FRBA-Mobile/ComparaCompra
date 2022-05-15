@@ -3,11 +3,14 @@ package utn.mobile.comparacompras
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import utn.mobile.comparacompras.databinding.ActivityMainBinding
+import utn.mobile.comparacompras.ui.scanner.ScannerFragment
 
 class MainActivity : AppCompatActivity() {
 

@@ -9,4 +9,6 @@
     <string name="boton_para_camara">Boton para camara</string>
     <string name="search">Search</string>
     <string name="boton_de_busqueda">boton de busqueda</string>
+    <string name="permissionTitle">Es necesario acceder a la cámara para escanear códigos de barra</string>
+    <string name="ok">Ok</string>
 </resources>

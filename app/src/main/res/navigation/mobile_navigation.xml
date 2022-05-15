@@ -22,4 +22,9 @@
         android:name="utn.mobile.comparacompras.ui.profile.ProfileFragment"
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/scannerFragment"
+        android:name="utn.mobile.comparacompras.ui.scanner.ScannerFragment"
+        android:label="fragment_scanner"
+        tools:layout="@layout/fragment_scanner" />
 </navigation>

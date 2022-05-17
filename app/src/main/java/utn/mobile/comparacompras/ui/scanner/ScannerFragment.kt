@@ -10,15 +10,15 @@ import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
+import androidx.navigation.fragment.findNavController
 import com.google.android.gms.vision.CameraSource
 import com.google.android.gms.vision.Detector
 import com.google.android.gms.vision.barcode.Barcode
 import com.google.android.gms.vision.barcode.BarcodeDetector
 import utn.mobile.comparacompras.R
 import utn.mobile.comparacompras.databinding.FragmentScannerBinding
-import utn.mobile.comparacompras.ui.search.SearchFragment
 import utn.mobile.comparacompras.utils.Permissions
 import java.io.IOException
 
@@ -37,8 +37,6 @@ class ScannerFragment : Fragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        //val scannerViewModel = ViewModelProvider(this)[ScannerViewModel::class.java]
-
         _binding = FragmentScannerBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
@@ -100,15 +98,11 @@ class ScannerFragment : Fragment(){
             }
 
             @SuppressLint("MissingPermission")
-            override fun surfaceChanged(holder: SurfaceHolder, format: Int,
-                width: Int, height: Int)
-            {
-                try
-                {
+            override fun surfaceChanged(holder: SurfaceHolder, format: Int, width: Int, height: Int) {
+                try {
                     cameraSource.start(holder)
                 }
-                catch (e: IOException)
-                {
+                catch (e: IOException) {
                     e.printStackTrace()
                 }
             }
@@ -121,8 +115,7 @@ class ScannerFragment : Fragment(){
 
         barcodeDetector.setProcessor(object : Detector.Processor<Barcode> {
             override fun release() {
-                Toast.makeText(requireContext(), "Scanner has been closed", Toast.LENGTH_SHORT)
-                    .show()
+                Toast.makeText(requireContext(), "Scanner has been closed", Toast.LENGTH_SHORT).show()
             }
 
             override fun receiveDetections(detections: Detector.Detections<Barcode>) {
@@ -131,27 +124,15 @@ class ScannerFragment : Fragment(){
                     requireActivity().runOnUiThread {
                         val scannedValue = barcodes.valueAt(0).rawValue
                         cameraSource.stop()
-                        val searchFragment = SearchFragment()
-                        Toast.makeText(requireContext(), "value- $scannedValue", Toast.LENGTH_SHORT).show()
-                        // TODO: Send scannedValue to searchFragment and search with that filter
-                        changeFragment(searchFragment)
+                        val bundle = bundleOf("ScannedValue" to scannedValue)
+                        val action = R.id.action_fragment_scanner_to_navigation_search
+                        findNavController().navigate(action, bundle)
                     }
                 }
-                else
-                {
-                    Toast.makeText(requireContext(), "value- else", Toast.LENGTH_SHORT).show()
-
+                else {
+                    Toast.makeText(requireContext(), "Error: no se detectó un código de barras único", Toast.LENGTH_SHORT).show()
                 }
             }
         })
-    }
-
-    fun changeFragment(newFragment: Fragment) {
-        val fragmentManager: FragmentManager = parentFragmentManager
-        val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.hide(this)
-        fragmentTransaction.replace(R.id.nav_host_fragment_activity_main, newFragment)
-        fragmentTransaction.addToBackStack(null)
-        fragmentTransaction.commit()
     }
 }

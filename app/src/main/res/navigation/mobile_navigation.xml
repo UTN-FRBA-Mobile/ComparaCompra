@@ -15,7 +15,11 @@
         android:id="@+id/navigation_search"
         android:name="utn.mobile.comparacompras.ui.search.SearchFragment"
         android:label="@string/title_search"
-        tools:layout="@layout/fragment_search" />
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_navigation_search_to_scannerFragment"
+            app:destination="@id/fragment_scanner" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_notifications"
@@ -23,8 +27,14 @@
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile" />
     <fragment
-        android:id="@+id/scannerFragment"
+        android:id="@+id/fragment_scanner"
         android:name="utn.mobile.comparacompras.ui.scanner.ScannerFragment"
-        android:label="fragment_scanner"
-        tools:layout="@layout/fragment_scanner" />
+        android:label="@string/escanear_codigo_de_barras"
+        tools:layout="@layout/fragment_scanner" >
+        <action
+            android:id="@+id/action_fragment_scanner_to_navigation_search"
+            app:destination="@id/navigation_search"
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/navigation_search" />
+    </fragment>
 </navigation>

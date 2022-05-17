@@ -5,20 +5,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import utn.mobile.comparacompras.R
 import utn.mobile.comparacompras.adapters.ProductsAdapter
 import utn.mobile.comparacompras.core.ProductsApi
 import utn.mobile.comparacompras.databinding.FragmentSearchBinding
-import utn.mobile.comparacompras.ui.scanner.ScannerFragment
 
 
-class SearchFragment : Fragment(){
+class SearchFragment : Fragment(R.layout.fragment_search){
 
     private var _binding: FragmentSearchBinding? = null
 
@@ -67,15 +65,22 @@ class SearchFragment : Fragment(){
             }
         }
 
-        val cameraButton = binding.cameraButton
-
-        cameraButton.setOnClickListener {
-            changeFragment(ScannerFragment())
-        }
+        val scannedValue = arguments?.getString("ScannedValue")
+        if (!scannedValue.isNullOrEmpty())
+            binding.textSearch.setText(scannedValue)
 
         return root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.cameraButton.setOnClickListener{
+            val action = R.id.action_navigation_search_to_scannerFragment
+            findNavController().navigate(action)
+        }
+    }
+    
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
@@ -83,21 +88,5 @@ class SearchFragment : Fragment(){
 
     interface OnFragmentInteractionListener {
         fun showFragment(fragment: Fragment)
-    }
-
-    private fun changeFragment(newFragment: Fragment) {
-        val fragmentManager: FragmentManager = parentFragmentManager
-        val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.hide(this)
-        fragmentTransaction.replace(R.id.nav_host_fragment_activity_main, newFragment)
-        fragmentTransaction.addToBackStack(null)
-        fragmentTransaction.commit()
-    }
-
-    fun setScannedValue(scannedValue: String) {
-        _scannedValue = scannedValue
-        // Si cambia el valor escaneado, debería hacer una búsqueda
-        //search(scannedValue)
-        Toast.makeText(requireContext(), "value- else", Toast.LENGTH_SHORT).show()
     }
 }

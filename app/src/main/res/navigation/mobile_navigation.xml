@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_navigation_search_to_scannerFragment"
             app:destination="@id/fragment_scanner" />
+        <action
+            android:id="@+id/action_navigation_search_to_productDetailsFragment"
+            app:destination="@id/productDetailsFragment" />
     </fragment>
 
     <fragment
@@ -37,4 +40,14 @@
             app:popUpToInclusive="true"
             app:popUpTo="@id/navigation_search" />
     </fragment>
+    <fragment
+        android:id="@+id/productDetailsFragment"
+        android:name="utn.mobile.comparacompras.ui.productDetails.ProductDetailsFragment"
+        android:label="Product Details"
+        tools:layout="@layout/fragment_product_details"/>
+    <fragment
+        android:id="@+id/productFragment2"
+        android:name="utn.mobile.comparacompras.ui.product.ProductFragment"
+        android:label="ProductFragment" />
+
 </navigation>

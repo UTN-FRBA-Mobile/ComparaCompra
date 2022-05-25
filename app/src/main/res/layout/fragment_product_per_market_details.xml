@@ -1,0 +1,41 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:orientation="horizontal"
+    android:layout_marginTop="20dp">
+
+    <ImageView
+        android:contentDescription="@string/imagen_del_supermercado"
+        android:id="@+id/imageMarket"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="30dp"
+        android:scaleType="fitXY"/>
+
+    <TextView
+        android:id="@+id/text_distance"
+        android:layout_width="0dp"
+        android:layout_weight="2"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="15sp"/>
+
+    <ImageView
+        android:contentDescription="@string/icono_de_mapa"
+        android:id="@+id/mapsIcon"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="30dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_baseline_place_24"/>
+
+    <TextView
+        android:id="@+id/text_productPrice"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="15sp"/>
+
+</LinearLayout>

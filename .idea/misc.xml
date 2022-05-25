@@ -3,10 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/anbca/OneDrive/Escritorio/UTN/DMI/ComparaCompra/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/anbca/OneDrive/Escritorio/UTN/DMI/ComparaCompra/app/src/main/res/drawable/ic_baseline_fastfood_24.xml" value="0.1215" />
+        <entry key="..\:/Users/anbca/OneDrive/Escritorio/UTN/DMI/ComparaCompra/app/src/main/res/drawable/ic_baseline_place_24.xml" value="0.1215" />
+        <entry key="..\:/Users/anbca/OneDrive/Escritorio/UTN/DMI/ComparaCompra/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/Users/anbca/OneDrive/Escritorio/UTN/DMI/ComparaCompra/app/src/main/res/layout/fragment_carts.xml" value="0.2" />
         <entry key="..\:/Users/anbca/OneDrive/Escritorio/UTN/DMI/ComparaCompra/app/src/main/res/layout/fragment_product.xml" value="0.2" />
+        <entry key="..\:/Users/anbca/OneDrive/Escritorio/UTN/DMI/ComparaCompra/app/src/main/res/layout/fragment_product_details.xml" value="0.1" />
+        <entry key="..\:/Users/anbca/OneDrive/Escritorio/UTN/DMI/ComparaCompra/app/src/main/res/layout/fragment_product_per_market_details.xml" value="0.16" />
         <entry key="..\:/Users/anbca/OneDrive/Escritorio/UTN/DMI/ComparaCompra/app/src/main/res/layout/fragment_profile.xml" value="0.1" />
+        <entry key="..\:/Users/anbca/OneDrive/Escritorio/UTN/DMI/ComparaCompra/app/src/main/res/layout/fragment_scanner.xml" value="0.2" />
         <entry key="..\:/Users/anbca/OneDrive/Escritorio/UTN/DMI/ComparaCompra/app/src/main/res/layout/fragment_search.xml" value="0.1" />
       </map>
     </option>

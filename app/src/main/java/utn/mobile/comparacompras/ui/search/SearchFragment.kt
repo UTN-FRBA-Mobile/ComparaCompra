@@ -8,16 +8,15 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import utn.mobile.comparacompras.R
-import utn.mobile.comparacompras.adapters.ProductsAdapter
-import utn.mobile.comparacompras.core.ProductsApi
 import utn.mobile.comparacompras.adapters.ApiInterface
-import utn.mobile.comparacompras.core.backEndAdapter.ProductxMarketResponse
+import utn.mobile.comparacompras.adapters.ProductMarketResponse
+import utn.mobile.comparacompras.adapters.ProductsAdapter
 import utn.mobile.comparacompras.databinding.FragmentSearchBinding
 
 
@@ -60,15 +59,6 @@ class SearchFragment : Fragment(R.layout.fragment_search)
 
         searchButton.setOnClickListener {
             binding.rvProducts.visibility = View.VISIBLE
-            val myDataset = ProductsApi().getProducts()
-
-            val viewManager = LinearLayoutManager(this.context)
-            val viewAdapter = ProductsAdapter(myDataset)
-
-            recyclerView = binding.rvProducts.apply {
-                layoutManager = viewManager
-                adapter = viewAdapter
-            }
 
             getAllProducts()
         }
@@ -82,22 +72,26 @@ class SearchFragment : Fragment(R.layout.fragment_search)
 
     //Backend Get - Trae todos los productos
     //TODO: Cambiar el GET para que traiga solamente el Id y el Nombre
-    //TODO: Mappeo contra ReciclerView
     private fun getAllProducts()
     {
         val apiInterface = ApiInterface.create().getAllProducts()
 
-        apiInterface.enqueue( object : Callback<List<ProductxMarketResponse>> {
-            override fun onResponse(call: Call<List<ProductxMarketResponse>>?, response: Response<List<ProductxMarketResponse>>?) {
+        apiInterface.enqueue( object : Callback<List<ProductMarketResponse>> {
+            override fun onResponse(call: Call<List<ProductMarketResponse>>?, response: Response<List<ProductMarketResponse>>?) {
 
                 if(response?.body() != null)
                 {
-                    //recyclerAdapter.setMovieListItems(response.body()!!)
-                    println(response.body()!![0].product.name)
+                    val viewManager = GridLayoutManager(context, 2)
+                    val viewAdapter = ProductsAdapter(response.body()!!)
+
+                    recyclerView = binding.rvProducts.apply{
+                        layoutManager = viewManager
+                        adapter = viewAdapter
+                    }
                 }
             }
 
-            override fun onFailure(call: Call<List<ProductxMarketResponse>>?, t: Throwable?)
+            override fun onFailure(call: Call<List<ProductMarketResponse>>?, t: Throwable?)
             {
                 println(t)
             }

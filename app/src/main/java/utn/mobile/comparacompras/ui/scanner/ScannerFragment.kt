@@ -23,7 +23,8 @@ import utn.mobile.comparacompras.utils.Permissions
 import java.io.IOException
 
 
-class ScannerFragment : Fragment(){
+class ScannerFragment : Fragment()
+{
     private val requestCodeCameraPermission = 1001
     private lateinit var cameraSource: CameraSource
     private lateinit var barcodeDetector: BarcodeDetector
@@ -71,6 +72,7 @@ class ScannerFragment : Fragment(){
 
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         cameraSource.stop()

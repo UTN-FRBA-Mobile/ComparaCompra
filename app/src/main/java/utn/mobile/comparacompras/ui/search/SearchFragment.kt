@@ -10,13 +10,19 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import utn.mobile.comparacompras.R
 import utn.mobile.comparacompras.adapters.ProductsAdapter
 import utn.mobile.comparacompras.core.ProductsApi
+import utn.mobile.comparacompras.adapters.ApiInterface
+import utn.mobile.comparacompras.core.backEndAdapter.ProductxMarketResponse
 import utn.mobile.comparacompras.databinding.FragmentSearchBinding
 
 
-class SearchFragment : Fragment(R.layout.fragment_search){
+class SearchFragment : Fragment(R.layout.fragment_search)
+{
 
     private var _binding: FragmentSearchBinding? = null
 
@@ -63,6 +69,8 @@ class SearchFragment : Fragment(R.layout.fragment_search){
                 layoutManager = viewManager
                 adapter = viewAdapter
             }
+
+            getAllProducts()
         }
 
         val scannedValue = arguments?.getString("ScannedValue")
@@ -72,6 +80,29 @@ class SearchFragment : Fragment(R.layout.fragment_search){
         return root
     }
 
+    //Backend Get - Trae todos los productos
+    //TODO: Cambiar el GET para que traiga solamente el Id y el Nombre
+    //TODO: Mappeo contra ReciclerView
+    private fun getAllProducts()
+    {
+        val apiInterface = ApiInterface.create().getAllProducts()
+
+        apiInterface.enqueue( object : Callback<List<ProductxMarketResponse>> {
+            override fun onResponse(call: Call<List<ProductxMarketResponse>>?, response: Response<List<ProductxMarketResponse>>?) {
+
+                if(response?.body() != null)
+                {
+                    //recyclerAdapter.setMovieListItems(response.body()!!)
+                    println(response.body()!![0].product.name)
+                }
+            }
+
+            override fun onFailure(call: Call<List<ProductxMarketResponse>>?, t: Throwable?)
+            {
+                println(t)
+            }
+        })
+    }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -88,7 +119,8 @@ class SearchFragment : Fragment(R.layout.fragment_search){
         _binding = null
     }
 
-    interface OnFragmentInteractionListener {
+    interface OnFragmentInteractionListener
+    {
         fun showFragment(fragment: Fragment)
     }
 }

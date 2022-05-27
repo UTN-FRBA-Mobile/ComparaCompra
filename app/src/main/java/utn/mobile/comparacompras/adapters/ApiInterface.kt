@@ -4,11 +4,14 @@ import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Path
 
 interface ApiInterface
 {
     @GET("all")
     fun getAllProducts() : Call<List<ProductMarketResponse>>
+    @GET("{id}")
+    fun getProduct(@Path("id") id: Long): Call<List<ProductMarketResponse>>
 
     companion object {
 

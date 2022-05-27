@@ -4,12 +4,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import utn.mobile.comparacompras.adapters.ApiInterface
+import utn.mobile.comparacompras.adapters.ProductMarketResponse
 import utn.mobile.comparacompras.adapters.ProductsPerMarketAdapter
-import utn.mobile.comparacompras.core.ProductsApi
 import utn.mobile.comparacompras.databinding.FragmentProductDetailsBinding
 
 class ProductDetailsFragment : Fragment() {
@@ -31,18 +36,33 @@ class ProductDetailsFragment : Fragment() {
         val root: View = binding.root
 
         val scannedValue = arguments?.getString("productId")
-        if (!scannedValue.isNullOrEmpty())
-            binding.textProductName.text = scannedValue
 
-        val myDataset = ProductsApi().getProductsPerMarketDetails()
+        val apiInterface = ApiInterface.create().getProduct(scannedValue!!.toLong())
 
-        val viewManager = LinearLayoutManager(this.context)
-        val viewAdapter = ProductsPerMarketAdapter(myDataset)
+        apiInterface.enqueue( object : Callback<List<ProductMarketResponse>>
+        {
+            override fun onResponse(call: Call<List<ProductMarketResponse>>?, response: Response<List<ProductMarketResponse>>?) {
 
-        recyclerView = binding.rvProductPerMarketDetails.apply {
-            layoutManager = viewManager
-            adapter = viewAdapter
-        }
+                if(response?.body() != null)
+                {
+                    binding.textProductName.text = response.body()!![0].product.name
+                    Picasso.get().load(response.body()!![0].product.imageUrl).fit().into(binding.imageProductDetails)
+
+                    val viewManager = LinearLayoutManager(context)
+                    val viewAdapter = ProductsPerMarketAdapter(response.body()!!)
+
+                    recyclerView = binding.rvProductPerMarketDetails.apply {
+                        layoutManager = viewManager
+                        adapter = viewAdapter
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<List<ProductMarketResponse>>?, t: Throwable?)
+            {
+                Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
+            }
+        })
 
         return root
     }

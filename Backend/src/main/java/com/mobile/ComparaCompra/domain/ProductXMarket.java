@@ -8,9 +8,10 @@ import lombok.Setter;
 @Setter
 @Getter
 @AllArgsConstructor
-public class ProductXMarket {
+public class ProductXMarket
+{
     Product product;
     long idMarket;
     long price;
-
+    String imageUrl;
 }

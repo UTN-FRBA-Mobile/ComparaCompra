@@ -3,23 +3,42 @@ package com.mobile.ComparaCompra.service;
 import com.mobile.ComparaCompra.domain.Market;
 import com.mobile.ComparaCompra.domain.Product;
 import com.mobile.ComparaCompra.domain.ProductXMarket;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
-public class ProductServiceImpl implements ProductService{
-    @Override
-    public List<ProductXMarket> getAllProducts() {
-        Product productA = new Product(1,"oreos");
-        ProductXMarket AA = new ProductXMarket(productA,1,50);
-        ProductXMarket AB = new ProductXMarket(productA,2,60);
-        ProductXMarket AC = new ProductXMarket(productA,3,30);
+public class ProductServiceImpl implements ProductService
+{
+    List<ProductXMarket> productList = new ArrayList<>();
 
-        Market marketA = new Market(1,"coto",List.of(AA));
-        Market marketB = new Market(2,"dia",List.of(AB));
-        Market marketC = new Market(3,"carrefour",List.of(AC));
+    @Autowired
+    public ProductServiceImpl()
+    {
+        Product productA = new Product(1,"Galletitas Oreo 118 Gr.", "https://ardiaprod.vteximg.com.br/arquivos/ids/223498-1000-1000/Galletitas-Oreo-118-Gr-_1.jpg?v=637861404024700000");
+        ProductXMarket AA = new ProductXMarket(productA,1,50,"https://images.rappi.com.ar/marketplace/coto-1599858972.png?d=200x200&e=webp");
+        ProductXMarket AB = new ProductXMarket(productA,2,60,"http://assets.stickpng.com/thumbs/5a0c729d9642de34b6b65cec.png");
+        ProductXMarket AC = new ProductXMarket(productA,3,30,"http://assets.stickpng.com/images/5a0c72729642de34b6b65ce7.png");
 
-        return List.of(AA,AB,AC);
+        Market marketA = new Market(1,"coto","https://images.rappi.com.ar/marketplace/coto-1599858972.png?d=200x200&e=webp", List.of(AA));
+        Market marketB = new Market(2,"dia","http://assets.stickpng.com/thumbs/5a0c729d9642de34b6b65cec.png", List.of(AB));
+        Market marketC = new Market(3,"carrefour","http://assets.stickpng.com/images/5a0c72729642de34b6b65ce7.png", List.of(AC));
+
+        productList = List.of(AA,AB,AC);
     }
+    @Override
+    public List<ProductXMarket> getAllProducts()
+    {
+        return productList;
+    }
+
+    @Override
+    public List<ProductXMarket> getProduct(Long idProduct)
+    {
+        return productList.stream().filter(p -> p.getProduct().getId() == idProduct).collect(Collectors.toList());
+    }
+
 }

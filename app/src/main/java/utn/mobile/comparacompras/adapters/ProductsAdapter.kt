@@ -27,14 +27,12 @@ class ProductsAdapter(private val productList: List<ProductMarketResponse>) : Re
             holder.view.findViewById<TextView>(R.id.text_productName).text = productList[position].product.name
 
             val productImageView: ImageView = holder.view.findViewById(R.id.imageProduct)
-            //TODO: Agregar al backend la URL de la imagen o el contenido de la imagen
-            Picasso.get().load(R.drawable.oreos).fit().into(productImageView)
+            Picasso.get().load(productList[position].product.imageUrl).fit().into(productImageView)
 
             val product: ProductMarketResponse = productList[position]
 
             holder.itemView.setOnClickListener {
                 val action = R.id.action_navigation_search_to_productDetailsFragment
-                //esto cambiarlo a un id despues
                 val id = product.product.id
                 val bundle = Bundle()
                 bundle.putString("productId", id.toString())

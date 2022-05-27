@@ -8,8 +8,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class Product {
+public class Product
+{
     long id;
     String name;
-
+    String imageUrl;
 }

@@ -4,6 +4,8 @@ import com.mobile.ComparaCompra.domain.ProductXMarket;
 
 import java.util.List;
 
-public interface ProductService {
+public interface ProductService
+{
     List<ProductXMarket> getAllProducts();
+    List<ProductXMarket> getProduct(Long idProduct);
 }

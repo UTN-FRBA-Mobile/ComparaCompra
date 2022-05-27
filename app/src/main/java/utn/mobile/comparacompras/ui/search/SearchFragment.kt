@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -82,7 +83,7 @@ class SearchFragment : Fragment(R.layout.fragment_search)
                 if(response?.body() != null)
                 {
                     val viewManager = GridLayoutManager(context, 2)
-                    val viewAdapter = ProductsAdapter(response.body()!!)
+                    val viewAdapter = ProductsAdapter(response.body()!!.distinctBy { p -> p.product.name.uppercase() })
 
                     recyclerView = binding.rvProducts.apply{
                         layoutManager = viewManager
@@ -93,7 +94,7 @@ class SearchFragment : Fragment(R.layout.fragment_search)
 
             override fun onFailure(call: Call<List<ProductMarketResponse>>?, t: Throwable?)
             {
-                println(t)
+                Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
             }
         })
     }

@@ -12,6 +12,7 @@ import java.util.List;
 public class Market {
     long id;
     String name;
+    String imageUrl;
 
     List<ProductXMarket> products;
 }

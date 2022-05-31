@@ -50,7 +50,7 @@ class ScannerFragment : Fragment()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if (Permissions.checkForPermissions(this, android.Manifest.permission.CAMERA, requestCodeCameraPermission, "Es necesario acceder a la cámara para escanear códigos de barra"))
+        if (Permissions.checkForPermissions(this, android.Manifest.permission.CAMERA, requestCodeCameraPermission, resources.getString(R.string.cameraPermissionTitle)))
             setupControls()
     }
 
@@ -64,7 +64,7 @@ class ScannerFragment : Fragment()
                 }
                 else {
                     // Controlar que no nos dieron permiso, por ejemplo mostrando un Toast
-                    Toast.makeText(activity, "No tienes permiso para acceder a la cámara", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(activity, resources.getString(R.string.no_tienes_permiso_camara), Toast.LENGTH_SHORT).show()
                 }
                 return
             }

@@ -1,6 +1,5 @@
 package utn.mobile.comparacompras.utils
 
-import android.app.Activity
 import android.content.Context
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AlertDialog
@@ -34,7 +33,7 @@ object Permissions {
 
     private fun showStoragePermissionExplanation(fragment: Fragment, permissionCode: String, reason: String, requestCode: Int) {
         val builder = AlertDialog.Builder(fragment.requireContext())
-        builder.setTitle(R.string.permissionTitle)
+        builder.setTitle(R.string.permission_title)
         builder.setCancelable(true)
         builder.setMessage(reason)
         builder.setPositiveButton(R.string.ok) { _, _ ->

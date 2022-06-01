@@ -71,8 +71,6 @@ class SearchFragment : Fragment(R.layout.fragment_search)
         return root
     }
 
-    //Backend Get - Trae todos los productos
-    //TODO: Cambiar el GET para que traiga solamente el Id y el Nombre
     private fun getAllProducts()
     {
         val apiInterface = ApiInterface.create().getAllProducts()

@@ -15,7 +15,6 @@ interface ApiInterface
 
     companion object {
 
-        //URL del localhost del emulador
         var BASE_URL = "https://api-comparacompras.azurewebsites.net/product/"
 
         fun create() : ApiInterface

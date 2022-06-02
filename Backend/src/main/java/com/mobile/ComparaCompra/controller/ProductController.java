@@ -23,9 +23,9 @@ public class ProductController
     ProductService productService;
 
     @RequestMapping(value = "/all", method = RequestMethod.GET)
-    public ResponseEntity<List<ProductXMarket>> getProducts()
+    public ResponseEntity<List<ProductXMarket>> getProducts(@RequestParam(required = false) String productName)
     {
-        List<ProductXMarket> allProducts = productService.getAllProducts();
+        List<ProductXMarket> allProducts = productService.getAllProducts(productName);
         return new ResponseEntity<>(allProducts,HttpStatus.OK);
     }
 

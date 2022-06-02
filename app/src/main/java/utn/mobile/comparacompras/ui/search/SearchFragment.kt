@@ -60,7 +60,6 @@ class SearchFragment : Fragment(R.layout.fragment_search)
 
         searchButton.setOnClickListener {
             binding.rvProducts.visibility = View.VISIBLE
-
             getAllProducts()
         }
 
@@ -73,7 +72,7 @@ class SearchFragment : Fragment(R.layout.fragment_search)
 
     private fun getAllProducts()
     {
-        val apiInterface = ApiInterface.create().getAllProducts()
+        val apiInterface = ApiInterface.create().getAllProducts(binding.textSearch.text.toString())
 
         apiInterface.enqueue( object : Callback<List<ProductMarketResponse>> {
             override fun onResponse(call: Call<List<ProductMarketResponse>>?, response: Response<List<ProductMarketResponse>>?) {

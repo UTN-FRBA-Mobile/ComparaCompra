@@ -29,10 +29,15 @@ public class ProductServiceImpl implements ProductService
 
         productList = List.of(AA,AB,AC);
     }
+
     @Override
-    public List<ProductXMarket> getAllProducts()
+    public List<ProductXMarket> getAllProducts(String productName)
     {
-        return productList;
+        if(productName == null)
+        {
+            return productList;
+        }
+        return productList.stream().filter(p -> p.getProduct().getName().toUpperCase().contains(productName.toUpperCase())).collect(Collectors.toList());
     }
 
     @Override

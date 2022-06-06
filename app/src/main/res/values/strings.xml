@@ -17,4 +17,6 @@
     <string name="permission_title">Necesitamos tu permiso</string>
     <string name="no_tienes_permiso_camara">No tienes permiso para acceder a la cámara</string>
     <string name="no_tienes_permiso_ubicacion">No tienes permiso para acceder a la ubicacion</string>
+    <string name="boton_para_producto">botón para producto</string>
+    <string name="agregar_a_carrito">Agregar a carrito</string>
 </resources>

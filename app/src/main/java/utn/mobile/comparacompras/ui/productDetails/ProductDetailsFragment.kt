@@ -1,9 +1,13 @@
 package utn.mobile.comparacompras.ui.productDetails
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,6 +20,8 @@ import utn.mobile.comparacompras.adapters.ApiInterface
 import utn.mobile.comparacompras.adapters.ProductMarketResponse
 import utn.mobile.comparacompras.adapters.ProductsPerMarketAdapter
 import utn.mobile.comparacompras.databinding.FragmentProductDetailsBinding
+import java.lang.Exception
+
 
 class ProductDetailsFragment : Fragment() {
 
@@ -58,11 +64,59 @@ class ProductDetailsFragment : Fragment() {
                 }
             }
 
-            override fun onFailure(call: Call<List<ProductMarketResponse>>?, t: Throwable?)
+            override fun onFailure(call: Call<List<ProductMarketResponse>>, t: Throwable)
             {
                 Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
             }
         })
+
+        val addToCartButton = binding.addToCartButton
+        val carts = arrayOf<CharSequence>("Carrito 1", "Carrito 2", "Carrito 3")
+        var selectedCart = carts[0]
+        print(selectedCart)
+        val ad: ArrayAdapter<*> = ArrayAdapter<Any?>(
+            requireContext(),
+            android.R.layout.simple_spinner_item,
+            carts
+        )
+        ad.setDropDownViewResource(
+            android.R.layout
+                .simple_spinner_dropdown_item)
+
+        addToCartButton.setOnClickListener {
+            val currentContext = requireContext()
+            val b: AlertDialog.Builder = AlertDialog.Builder(currentContext)
+
+            val sp = Spinner(currentContext)
+            sp.adapter = ad
+            sp.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>,
+                    view: View,
+                    position: Int,
+                    id: Long
+                ) {
+                    selectedCart = carts[position]
+                }
+
+                override fun onNothingSelected(p0: AdapterView<*>?) {
+                    throw Exception("Tiene que haber un carrito seleccionado")
+                }
+            }
+
+            b.setTitle("Elegir Carrito")
+                .setPositiveButton("Aceptar"
+                ) { dialog, id ->
+                    print(dialog)
+                    print(id)
+                    // selectedCart.addProduct(product)
+                }
+                .setNegativeButton("Cancelar",null)
+
+            b.setView(sp)
+            b.create().show()
+
+        }
 
         return root
     }

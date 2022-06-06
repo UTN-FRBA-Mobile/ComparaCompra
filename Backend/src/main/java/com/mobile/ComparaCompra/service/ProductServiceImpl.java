@@ -22,12 +22,15 @@ public class ProductServiceImpl implements ProductService
         ProductXMarket AA = new ProductXMarket(productA,1,50,"https://images.rappi.com.ar/marketplace/coto-1599858972.png?d=200x200&e=webp");
         ProductXMarket AB = new ProductXMarket(productA,2,60,"http://assets.stickpng.com/thumbs/5a0c729d9642de34b6b65cec.png");
         ProductXMarket AC = new ProductXMarket(productA,3,30,"http://assets.stickpng.com/images/5a0c72729642de34b6b65ce7.png");
+        ProductXMarket AC2 = new ProductXMarket(productA,3,30,"http://assets.stickpng.com/images/5a0c72729642de34b6b65ce7.png");
+        ProductXMarket AC3 = new ProductXMarket(productA,3,30,"http://assets.stickpng.com/images/5a0c72729642de34b6b65ce7.png");
+        ProductXMarket AC4 = new ProductXMarket(productA,3,30,"http://assets.stickpng.com/images/5a0c72729642de34b6b65ce7.png");
 
         Market marketA = new Market(1,"coto","https://images.rappi.com.ar/marketplace/coto-1599858972.png?d=200x200&e=webp", List.of(AA));
         Market marketB = new Market(2,"dia","http://assets.stickpng.com/thumbs/5a0c729d9642de34b6b65cec.png", List.of(AB));
         Market marketC = new Market(3,"carrefour","http://assets.stickpng.com/images/5a0c72729642de34b6b65ce7.png", List.of(AC));
 
-        productList = List.of(AA,AB,AC);
+        productList = List.of(AA,AB,AC,AC2,AC3,AC4);
     }
 
     @Override

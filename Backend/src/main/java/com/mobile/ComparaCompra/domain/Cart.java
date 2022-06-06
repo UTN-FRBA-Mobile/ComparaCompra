@@ -5,13 +5,15 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
-public class Product
+public class Cart
 {
     long id;
     String name;
-    String imageUrl;
-    String barcode;
+    List<Product> products;
+    User user;    
 }

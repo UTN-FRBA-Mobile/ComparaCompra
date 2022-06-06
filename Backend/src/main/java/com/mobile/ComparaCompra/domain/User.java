@@ -8,10 +8,12 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class Product
+public class User
 {
     long id;
     String name;
-    String imageUrl;
-    String barcode;
+    String address;
+    double maxDistance;
+    double latitude;
+    double longitude;
 }

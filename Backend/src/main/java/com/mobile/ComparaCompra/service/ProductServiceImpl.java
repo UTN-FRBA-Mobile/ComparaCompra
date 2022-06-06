@@ -18,7 +18,7 @@ public class ProductServiceImpl implements ProductService
     @Autowired
     public ProductServiceImpl()
     {
-        Product productA = new Product(1,"Galletitas Oreo 118 Gr.", "https://ardiaprod.vteximg.com.br/arquivos/ids/223498-1000-1000/Galletitas-Oreo-118-Gr-_1.jpg?v=637861404024700000");
+        Product productA = new Product(1,"Galletitas Oreo 118 Gr.", "https://ardiaprod.vteximg.com.br/arquivos/ids/223498-1000-1000/Galletitas-Oreo-118-Gr-_1.jpg?v=637861404024700000", "111111111");
         ProductXMarket AA = new ProductXMarket(productA,1,50,"https://images.rappi.com.ar/marketplace/coto-1599858972.png?d=200x200&e=webp");
         ProductXMarket AB = new ProductXMarket(productA,2,60,"http://assets.stickpng.com/thumbs/5a0c729d9642de34b6b65cec.png");
         ProductXMarket AC = new ProductXMarket(productA,3,30,"http://assets.stickpng.com/images/5a0c72729642de34b6b65ce7.png");
@@ -37,11 +37,11 @@ public class ProductServiceImpl implements ProductService
         {
             return productList;
         }
-        return productList.stream().filter(p -> p.getProduct().getName().toUpperCase().contains(productName.toUpperCase())).collect(Collectors.toList());
+        return productList.stream().filter(p -> p.getProduct().getName().toUpperCase().contains(productName.toUpperCase()) || p.getProduct().getBarcode().toUpperCase().contains(productName.toUpperCase())).collect(Collectors.toList());
     }
 
     @Override
-    public List<ProductXMarket> getProduct(Long idProduct)
+    public List<ProductXMarket> getProduct(long idProduct)
     {
         return productList.stream().filter(p -> p.getProduct().getId() == idProduct).collect(Collectors.toList());
     }

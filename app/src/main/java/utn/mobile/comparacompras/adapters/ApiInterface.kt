@@ -9,15 +9,19 @@ import retrofit2.http.Query
 
 interface ApiInterface
 {
-    @GET("all")
+    @GET("product/all")
     fun getAllProducts(@Query("productName") productName: String) : Call<List<ProductMarketResponse>>
-    @GET("{id}")
+    @GET("product/{id}")
     fun getProduct(@Path("id") id: Long): Call<List<ProductMarketResponse>>
+    @GET("user/{id}")
+    fun getUser(@Path("id") id: Long): Call<UserResponse>
+    @GET("cart/user/{id}")
+    fun getCartsByUser(@Path("id") id: Long): Call<List<CartResponse>>
 
     companion object {
 
-        //var BASE_URL = "https://api-comparacompras.azurewebsites.net/product/"
-        private var BASE_URL = "http://10.0.2.2:8080/product/"
+        //var BASE_URL = "https://api-comparacompras.azurewebsites.net/"
+        private var BASE_URL = "http://10.0.2.2:8080/"
 
         fun create() : ApiInterface
         {

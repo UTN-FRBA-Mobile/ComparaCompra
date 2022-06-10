@@ -19,4 +19,5 @@
     <string name="no_tienes_permiso_ubicacion">No tienes permiso para acceder a la ubicacion</string>
     <string name="boton_para_producto">botón para producto</string>
     <string name="agregar_a_carrito">Agregar a carrito</string>
+    <string name="map_view">Vista del mapa</string>
 </resources>

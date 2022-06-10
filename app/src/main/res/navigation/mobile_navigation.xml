@@ -28,7 +28,11 @@
         android:id="@+id/navigation_notifications"
         android:name="utn.mobile.comparacompras.ui.profile.ProfileFragment"
         android:label="@string/title_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_navigation_notifications_to_mapsFragment"
+            app:destination="@id/mapsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/fragment_scanner"
         android:name="utn.mobile.comparacompras.ui.scanner.ScannerFragment"
@@ -49,5 +53,10 @@
         android:id="@+id/productFragment2"
         android:name="utn.mobile.comparacompras.ui.product.ProductFragment"
         android:label="ProductFragment" />
+    <fragment
+        android:id="@+id/mapsFragment"
+        android:name="utn.mobile.comparacompras.ui.map.MapsFragment"
+        android:label="Map"
+        tools:layout="@layout/fragment_maps" />
 
 </navigation>

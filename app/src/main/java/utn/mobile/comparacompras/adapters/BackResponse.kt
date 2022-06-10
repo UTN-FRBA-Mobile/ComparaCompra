@@ -2,7 +2,7 @@ package utn.mobile.comparacompras.adapters
 
 class ProductResponse(val id: Long, val name: String, val imageUrl: String)
 
-class ProductMarketResponse(val product: ProductResponse, val idMarket: Long, val price: Number, val imageUrl: String)
+class ProductMarketResponse(val product: ProductResponse, val idMarket: Long, val price: Number, val imageUrl: String, val distance: Double)
 
 class UserResponse(val id: Long, val name: String, val address: String, val maxDistance: Double, val latitude: Double, val longitude: Double)
 

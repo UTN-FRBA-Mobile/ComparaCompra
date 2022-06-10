@@ -16,6 +16,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import utn.mobile.comparacompras.databinding.ActivityMainBinding
+import utn.mobile.comparacompras.utils.User
 
 class MainActivity : AppCompatActivity()
 {
@@ -93,29 +94,39 @@ class MainActivity : AppCompatActivity()
             {
                 locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 3600000, 0F)
                 { p0 ->
-                    if (p0 != null)
-                    {
-                        println("Lat: " + p0.latitude + " Lon: " + p0.longitude)
-                    }
+                    User.longitude = p0.longitude
+                    User.latitude = p0.latitude
+                    println("Lat: " + p0.latitude + " Lon: " + p0.longitude)
                 }
                 val localGpsLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
                 if (localGpsLocation != null)
+                {
+                    User.longitude = localGpsLocation.longitude
+                    User.latitude = localGpsLocation.latitude
                     println("Lat: " + localGpsLocation.latitude + " Lon: " + localGpsLocation.longitude)
+                }
+
             }
             if (hasNetwork)
             {
                 locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 3600000, 0F
                 ) { p0 ->
-                    if (p0 != null) {
-                        println("Lat: " + p0.latitude + " Lon: " + p0.longitude)
-                    }
+                    User.longitude = p0.longitude
+                    User.latitude = p0.latitude
+                    println("Lat: " + p0.latitude + " Lon: " + p0.longitude)
                 }
                 val localNetworkLocation = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
                 if (localNetworkLocation != null)
+                {
+                    User.longitude = localNetworkLocation.longitude
+                    User.latitude = localNetworkLocation.latitude
                     println("Lat: " + localNetworkLocation.latitude + " Lon: " + localNetworkLocation.longitude)
+                }
             }
         }else
         {
+            User.longitude = 0.0
+            User.latitude = 0.0
             println("Lat: " + "0" + " Lon: " + "0")
         }
     }

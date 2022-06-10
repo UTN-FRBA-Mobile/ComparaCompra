@@ -30,9 +30,9 @@ public class ProductController
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<List<ProductXMarket>> getProduct(@PathVariable Long id)
+    public ResponseEntity<List<ProductXMarket>> getProduct(@PathVariable Long id, @RequestParam(name = "lat") double lat, @RequestParam(name="lon") double lon, @RequestParam(name = "maxDistance") double maxDistance)
     {
-        List<ProductXMarket> productMarkets = productService.getProduct(id);
+        List<ProductXMarket> productMarkets = productService.getProduct(id, lat, lon, maxDistance);
         return new ResponseEntity<>(productMarkets, HttpStatus.OK);
     }
 }

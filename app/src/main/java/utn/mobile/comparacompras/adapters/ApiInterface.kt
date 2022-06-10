@@ -12,7 +12,8 @@ interface ApiInterface
     @GET("product/all")
     fun getAllProducts(@Query("productName") productName: String) : Call<List<ProductMarketResponse>>
     @GET("product/{id}")
-    fun getProduct(@Path("id") id: Long): Call<List<ProductMarketResponse>>
+    fun getProduct(@Path("id") id: Long, @Query("lat") lat: Double, @Query("lon") lon: Double,
+                   @Query("maxDistance") maxDistance: Double): Call<List<ProductMarketResponse>>
     @GET("user/{id}")
     fun getUser(@Path("id") id: Long): Call<UserResponse>
     @GET("cart/user/{id}")

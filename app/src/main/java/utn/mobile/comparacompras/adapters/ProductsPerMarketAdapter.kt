@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import utn.mobile.comparacompras.R
+import kotlin.math.roundToInt
 import kotlin.random.Random
 
 
@@ -26,7 +27,7 @@ class ProductsPerMarketAdapter(private val myDataset: List<ProductMarketResponse
             val productImageView: ImageView = holder.view.findViewById(R.id.imageMarket)
             Picasso.get().load(myDataset[position].imageUrl).fit().into(productImageView)
 
-            holder.view.findViewById<TextView>(R.id.text_distance).text = "${Random(100).nextInt(5, 100)} mts"
+            holder.view.findViewById<TextView>(R.id.text_distance).text = "${myDataset[position].distance.roundToInt()} mts"
             holder.view.findViewById<TextView>(R.id.text_productPrice).text = "$${myDataset[position].price}"
         }
 

@@ -20,6 +20,7 @@ import utn.mobile.comparacompras.adapters.ApiInterface
 import utn.mobile.comparacompras.adapters.ProductMarketResponse
 import utn.mobile.comparacompras.adapters.ProductsPerMarketAdapter
 import utn.mobile.comparacompras.databinding.FragmentProductDetailsBinding
+import utn.mobile.comparacompras.utils.User
 import java.lang.Exception
 
 
@@ -43,13 +44,16 @@ class ProductDetailsFragment : Fragment() {
 
         val scannedValue = arguments?.getString("productId")
 
-        val apiInterface = ApiInterface.create().getProduct(scannedValue!!.toLong())
+        val apiInterface = ApiInterface.create().getProduct(scannedValue!!.toLong(), User.latitude, User.longitude, User.maxDistance)
 
         apiInterface.enqueue( object : Callback<List<ProductMarketResponse>>
         {
-            override fun onResponse(call: Call<List<ProductMarketResponse>>?, response: Response<List<ProductMarketResponse>>?) {
+            override fun onResponse(
+                call: Call<List<ProductMarketResponse>>,
+                response: Response<List<ProductMarketResponse>>
+            ) {
 
-                if(response?.body() != null)
+                if(response.body() != null)
                 {
                     binding.textProductName.text = response.body()!![0].product.name
                     Picasso.get().load(response.body()!![0].product.imageUrl).fit().into(binding.imageProductDetails)

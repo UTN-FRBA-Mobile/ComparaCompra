@@ -14,23 +14,25 @@ import java.util.stream.Collectors;
 public class ProductServiceImpl implements ProductService
 {
     List<ProductXMarket> productList = new ArrayList<>();
+    List<Market> marketList = new ArrayList<>();
 
     @Autowired
     public ProductServiceImpl()
     {
         Product productA = new Product(1,"Galletitas Oreo 118 Gr.", "https://ardiaprod.vteximg.com.br/arquivos/ids/223498-1000-1000/Galletitas-Oreo-118-Gr-_1.jpg?v=637861404024700000", "111111111");
-        ProductXMarket AA = new ProductXMarket(productA,1,50,"https://images.rappi.com.ar/marketplace/coto-1599858972.png?d=200x200&e=webp");
-        ProductXMarket AB = new ProductXMarket(productA,2,60,"http://assets.stickpng.com/thumbs/5a0c729d9642de34b6b65cec.png");
-        ProductXMarket AC = new ProductXMarket(productA,3,30,"http://assets.stickpng.com/images/5a0c72729642de34b6b65ce7.png");
-        ProductXMarket AC2 = new ProductXMarket(productA,3,30,"http://assets.stickpng.com/images/5a0c72729642de34b6b65ce7.png");
-        ProductXMarket AC3 = new ProductXMarket(productA,3,30,"http://assets.stickpng.com/images/5a0c72729642de34b6b65ce7.png");
-        ProductXMarket AC4 = new ProductXMarket(productA,3,30,"http://assets.stickpng.com/images/5a0c72729642de34b6b65ce7.png");
+        ProductXMarket AA = new ProductXMarket(productA,1,50,"https://images.rappi.com.ar/marketplace/coto-1599858972.png?d=200x200&e=webp", 0);
+        ProductXMarket AB = new ProductXMarket(productA,2,60,"http://assets.stickpng.com/thumbs/5a0c729d9642de34b6b65cec.png", 0);
+        ProductXMarket AC = new ProductXMarket(productA,3,30,"http://assets.stickpng.com/images/5a0c72729642de34b6b65ce7.png", 0);
+        ProductXMarket AC2 = new ProductXMarket(productA,3,30,"http://assets.stickpng.com/images/5a0c72729642de34b6b65ce7.png", 0);
+        ProductXMarket AC3 = new ProductXMarket(productA,3,30,"http://assets.stickpng.com/images/5a0c72729642de34b6b65ce7.png", 0);
+        ProductXMarket AC4 = new ProductXMarket(productA,3,30,"http://assets.stickpng.com/images/5a0c72729642de34b6b65ce7.png", 0);
 
-        Market marketA = new Market(1,"coto","https://images.rappi.com.ar/marketplace/coto-1599858972.png?d=200x200&e=webp", List.of(AA));
-        Market marketB = new Market(2,"dia","http://assets.stickpng.com/thumbs/5a0c729d9642de34b6b65cec.png", List.of(AB));
-        Market marketC = new Market(3,"carrefour","http://assets.stickpng.com/images/5a0c72729642de34b6b65ce7.png", List.of(AC));
+        Market marketA = new Market(1,"coto","https://images.rappi.com.ar/marketplace/coto-1599858972.png?d=200x200&e=webp", -130.0, 40.0, List.of(AA));
+        Market marketB = new Market(2,"dia","http://assets.stickpng.com/thumbs/5a0c729d9642de34b6b65cec.png", -300.0, 50.0, List.of(AB));
+        Market marketC = new Market(3,"carrefour","http://assets.stickpng.com/images/5a0c72729642de34b6b65ce7.png", 150.0, 40.0, List.of(AC));
 
         productList = List.of(AA,AB,AC,AC2,AC3,AC4);
+        marketList = List.of(marketA, marketB, marketC);
     }
 
     @Override
@@ -44,9 +46,15 @@ public class ProductServiceImpl implements ProductService
     }
 
     @Override
-    public List<ProductXMarket> getProduct(long idProduct)
+    public List<ProductXMarket> getProduct(long idProduct, double lat, double lon, double maxDistance)
     {
-        return productList.stream().filter(p -> p.getProduct().getId() == idProduct).collect(Collectors.toList());
+        List<ProductXMarket> productXMarketsList = productList.stream().filter(p -> p.getProduct().getId() == idProduct
+                && marketList.stream().filter(m -> m.getId() == p.getIdMarket()).collect(Collectors.toList()).get(0).getDistance(lat, lon) <= maxDistance)
+                .collect(Collectors.toList());
+
+        productXMarketsList.forEach(p -> p.setDistance(marketList.stream().filter(m -> m.getId() == p.getIdMarket()).collect(Collectors.toList()).get(0).getDistance(lat, lon)));
+
+        return productXMarketsList;
     }
 
 }

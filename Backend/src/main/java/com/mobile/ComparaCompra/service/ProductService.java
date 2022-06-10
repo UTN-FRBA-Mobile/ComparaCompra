@@ -7,5 +7,5 @@ import java.util.List;
 public interface ProductService
 {
     List<ProductXMarket> getAllProducts(String productName);
-    List<ProductXMarket> getProduct(long idProduct);
+    List<ProductXMarket> getProduct(long idProduct, double lat, double lon, double maxDistance);
 }

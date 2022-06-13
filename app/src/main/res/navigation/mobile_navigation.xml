@@ -48,7 +48,11 @@
         android:id="@+id/productDetailsFragment"
         android:name="utn.mobile.comparacompras.ui.productDetails.ProductDetailsFragment"
         android:label="Product Details"
-        tools:layout="@layout/fragment_product_details"/>
+        tools:layout="@layout/fragment_product_details">
+        <action
+            android:id="@+id/action_productDetailsFragment_to_navigation_search"
+            app:destination="@id/navigation_search" />
+    </fragment>
     <fragment
         android:id="@+id/productFragment2"
         android:name="utn.mobile.comparacompras.ui.product.ProductFragment"

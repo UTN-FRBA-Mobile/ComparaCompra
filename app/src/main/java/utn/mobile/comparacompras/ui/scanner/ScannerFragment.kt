@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -117,7 +118,9 @@ class ScannerFragment : Fragment()
 
         barcodeDetector.setProcessor(object : Detector.Processor<Barcode> {
             override fun release() {
-                Toast.makeText(requireContext(), "Scanner has been closed", Toast.LENGTH_SHORT).show()
+                requireActivity().runOnUiThread {
+                    Toast.makeText(requireContext(), "Scanner has been closed", Toast.LENGTH_SHORT).show()
+                }
             }
 
             override fun receiveDetections(detections: Detector.Detections<Barcode>) {
@@ -131,9 +134,11 @@ class ScannerFragment : Fragment()
                         findNavController().navigate(action, bundle)
                     }
                 }
-                else {
-                    Toast.makeText(requireContext(), "Error: no se detectó un código de barras único", Toast.LENGTH_SHORT).show()
-                }
+                //else {
+                //    requireActivity().runOnUiThread {
+                //        Toast.makeText(requireContext(), "Error: no se detectó un código de barras único", Toast.LENGTH_SHORT).show()
+                //    }
+                //}
             }
         })
     }

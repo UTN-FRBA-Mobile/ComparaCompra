@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -23,6 +24,8 @@ class ProfileFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+    private var userLatitude : Double = 0.0
+    private var userLongitude : Double = 0.0
     var button: ImageButton? = null
 
     override fun onCreateView(
@@ -37,8 +40,9 @@ class ProfileFragment : Fragment() {
         button = binding.mapsImageButton
         val root: View = binding.root
         button!!.setOnClickListener() {
+            val bundle = bundleOf("UserLatitude" to userLatitude, "UserLongitude" to userLongitude)
             val action = R.id.action_navigation_notifications_to_mapsFragment
-            findNavController().navigate(action)
+            findNavController().navigate(action, bundle)
         }
         getUser()
         return root
@@ -56,6 +60,8 @@ class ProfileFragment : Fragment() {
                     binding.userName.text = user.name;
                     binding.userAddress.setText(user.address)
                     binding.maxDistanceField.setText(user.maxDistance.toString())
+                    userLatitude = user.latitude
+                    userLongitude = user.longitude
                 }
             }
 

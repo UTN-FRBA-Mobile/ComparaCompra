@@ -28,4 +28,5 @@
     <string name="placeholder_max_distancia">Max dist.</string>
     <string name="label_distancia_maxima">Distancia máxima</string>
     <string name="label_unidad_km">KM</string>
+    <string name="label_posicion_usuario">Posición actual del usuario</string>
 </resources>

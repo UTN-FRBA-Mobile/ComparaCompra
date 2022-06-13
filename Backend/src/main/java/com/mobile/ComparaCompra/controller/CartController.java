@@ -23,9 +23,9 @@ public class CartController
     CartService cartService;
 
     @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
-    public ResponseEntity<List<Cart>> getCartsByUser(@PathVariable Long id)
+    public ResponseEntity<List<Cart>> getCartsByUserAndName(@PathVariable Long id, @RequestParam(required = false) String cartName)
     {
-    	List<Cart> cart = cartService.getCartsByUser(id);
+    	List<Cart> cart = cartService.getCartsByUserAndName(id, cartName);
         return new ResponseEntity<List<Cart>>(cart, HttpStatus.OK);
     }
 }

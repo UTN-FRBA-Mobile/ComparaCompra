@@ -29,9 +29,15 @@ public class CartServiceImpl implements CartService
     }
 
     @Override
-    public List<Cart> getCartsByUser(long idUser)
+    public List<Cart> getCartsByUserAndName(long idUser, String cartName)
     {
-        return cartsList.stream().filter(c -> c.getUser().getId() == idUser).collect(Collectors.toList());
+    	List<Cart> carts = cartsList;
+    	if (cartName != null && !cartName.isEmpty())
+    	{
+    		carts = carts.stream().filter(c -> c.getName().contains(cartName)).collect(Collectors.toList());
+    	}
+    		
+        return carts.stream().filter(c -> c.getUser().getId() == idUser).collect(Collectors.toList());
     }
 
 }

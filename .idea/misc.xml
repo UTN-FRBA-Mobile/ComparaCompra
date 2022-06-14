@@ -5,21 +5,21 @@
       <map>
         <entry key="..\:/Documentos/UTN/2022/Mobile/ComparaCompra/app/src/main/res/layout/fragment_product.xml" value="0.36666666666666664" />
         <entry key="..\:/Documentos/UTN/2022/Mobile/ComparaCompra/app/src/main/res/layout/fragment_product_details.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/anbca/AppData/Local/Android/Sdk/platforms/android-32/data/res/layout/simple_spinner_item.xml" value="0.12864583333333332" />
         <entry key="..\:/Users/anbca/OneDrive/Escritorio/UTN/DMI/ComparaCompra/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/anbca/OneDrive/Escritorio/UTN/DMI/ComparaCompra/app/src/main/res/layout/fragment_carts.xml" value="0.2" />
         <entry key="..\:/Users/anbca/OneDrive/Escritorio/UTN/DMI/ComparaCompra/app/src/main/res/layout/fragment_product.xml" value="0.2" />
         <entry key="..\:/Users/anbca/OneDrive/Escritorio/UTN/DMI/ComparaCompra/app/src/main/res/layout/fragment_profile.xml" value="0.1" />
         <entry key="..\:/Users/anbca/OneDrive/Escritorio/UTN/DMI/ComparaCompra/app/src/main/res/layout/fragment_search.xml" value="0.1" />
-        <entry key="..\:/Users/franchupedu/Desktop/Repos/ComparaCompra/app/src/main/res/layout/activity_main.xml" value="0.1" />
-        <entry key="..\:/Users/franchupedu/Desktop/Repos/ComparaCompra/app/src/main/res/layout/fragment_carts.xml" value="0.1796875" />
-        <entry key="..\:/Users/franchupedu/Desktop/Repos/ComparaCompra/app/src/main/res/layout/fragment_map.xml" value="0.1585144927536232" />
-        <entry key="..\:/Users/franchupedu/Desktop/Repos/ComparaCompra/app/src/main/res/layout/fragment_maps.xml" value="0.1381340579710145" />
-        <entry key="..\:/Users/franchupedu/Desktop/Repos/ComparaCompra/app/src/main/res/layout/fragment_product.xml" value="0.1585144927536232" />
-        <entry key="..\:/Users/franchupedu/Desktop/Repos/ComparaCompra/app/src/main/res/layout/fragment_product_details.xml" value="0.1" />
-        <entry key="..\:/Users/franchupedu/Desktop/Repos/ComparaCompra/app/src/main/res/layout/fragment_product_per_market_details.xml" value="0.1585144927536232" />
-        <entry key="..\:/Users/franchupedu/Desktop/Repos/ComparaCompra/app/src/main/res/layout/fragment_profile.xml" value="0.25" />
-        <entry key="..\:/Users/franchupedu/Desktop/Repos/ComparaCompra/app/src/main/res/layout/fragment_search.xml" value="0.1585144927536232" />
-        <entry key="..\:/Users/franchupedu/Desktop/Repos/ComparaCompra/app/src/main/res/layout/map_fragment.xml" value="0.1585144927536232" />
+        <entry key="..\:/Users/anbca/OneDrive/Escritorio/UTN/Mobile/ComparaCompra/app/src/main/res/layout/activity_main.xml" value="0.18" />
+        <entry key="..\:/Users/anbca/OneDrive/Escritorio/UTN/Mobile/ComparaCompra/app/src/main/res/layout/fragment_add_product.xml" value="0.2" />
+        <entry key="..\:/Users/anbca/OneDrive/Escritorio/UTN/Mobile/ComparaCompra/app/src/main/res/layout/fragment_carts.xml" value="0.14583333333333334" />
+        <entry key="..\:/Users/anbca/OneDrive/Escritorio/UTN/Mobile/ComparaCompra/app/src/main/res/layout/fragment_product.xml" value="0.14583333333333334" />
+        <entry key="..\:/Users/anbca/OneDrive/Escritorio/UTN/Mobile/ComparaCompra/app/src/main/res/layout/fragment_product_details.xml" value="0.25" />
+        <entry key="..\:/Users/anbca/OneDrive/Escritorio/UTN/Mobile/ComparaCompra/app/src/main/res/layout/fragment_product_per_market_details.xml" value="0.22" />
+        <entry key="..\:/Users/anbca/OneDrive/Escritorio/UTN/Mobile/ComparaCompra/app/src/main/res/layout/fragment_profile.xml" value="0.14583333333333334" />
+        <entry key="..\:/Users/anbca/OneDrive/Escritorio/UTN/Mobile/ComparaCompra/app/src/main/res/layout/fragment_scanner.xml" value="0.14583333333333334" />
+        <entry key="..\:/Users/anbca/OneDrive/Escritorio/UTN/Mobile/ComparaCompra/app/src/main/res/menu/bottom_nav_menu.xml" value="0.2" />
       </map>
     </option>
   </component>

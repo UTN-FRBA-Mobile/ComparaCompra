@@ -26,7 +26,7 @@ class ProductsAdapter(private val productList: List<ProductMarketResponse>) : Re
         {
             holder.view.findViewById<TextView>(R.id.text_productName).text = productList[position].product.name
 
-            val productImageView: ImageView = holder.view.findViewById(R.id.imageCart)
+            val productImageView: ImageView = holder.view.findViewById(R.id.imageProduct)
             Picasso.get().load(productList[position].product.imageUrl).fit().into(productImageView)
 
             val product: ProductMarketResponse = productList[position]

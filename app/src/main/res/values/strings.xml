@@ -30,4 +30,12 @@
     <string name="label_unidad_km">KM</string>
     <string name="label_posicion_usuario">Posición actual del usuario</string>
     <string name="alt_menu_carrito">Menú contextual del carrito</string>
+    <string name="menu_item_borrar">Borrar</string>
+    <string name="menu_item_editar">Editar</string>
+    <string name="menu_item_renombrar">Renombrar</string>
+    <string name="confirmacion_borrar_carrito">¿Estás seguro que deseas borrar el carrito?</string>
+    <string name="title_editar_carrito">Editar carrito</string>
+    <string name="title_renombrar_carrito">Renombrar carrito</string>
+    <string name="aceptar">Aceptar</string>
+    <string name="cancelar">Cancelar</string>
 </resources>

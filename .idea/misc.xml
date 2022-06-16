@@ -11,21 +11,27 @@
         <entry key="..\:/Users/anbca/OneDrive/Escritorio/UTN/DMI/ComparaCompra/app/src/main/res/layout/fragment_product.xml" value="0.2" />
         <entry key="..\:/Users/anbca/OneDrive/Escritorio/UTN/DMI/ComparaCompra/app/src/main/res/layout/fragment_profile.xml" value="0.1" />
         <entry key="..\:/Users/anbca/OneDrive/Escritorio/UTN/DMI/ComparaCompra/app/src/main/res/layout/fragment_search.xml" value="0.1" />
-        <entry key="..\:/Users/anbca/OneDrive/Escritorio/UTN/Mobile/ComparaCompra/app/src/main/res/layout/activity_main.xml" value="0.18" />
         <entry key="..\:/Users/anbca/OneDrive/Escritorio/UTN/Mobile/ComparaCompra/app/src/main/res/layout/fragment_add_product.xml" value="0.2" />
         <entry key="..\:/Users/anbca/OneDrive/Escritorio/UTN/Mobile/ComparaCompra/app/src/main/res/layout/fragment_carts.xml" value="0.14583333333333334" />
-        <entry key="..\:/Users/anbca/OneDrive/Escritorio/UTN/Mobile/ComparaCompra/app/src/main/res/layout/fragment_item_cart.xml" value="0.15081521739130435" />
         <entry key="..\:/Users/anbca/OneDrive/Escritorio/UTN/Mobile/ComparaCompra/app/src/main/res/layout/fragment_product.xml" value="0.14583333333333334" />
         <entry key="..\:/Users/anbca/OneDrive/Escritorio/UTN/Mobile/ComparaCompra/app/src/main/res/layout/fragment_product_details.xml" value="0.25" />
         <entry key="..\:/Users/anbca/OneDrive/Escritorio/UTN/Mobile/ComparaCompra/app/src/main/res/layout/fragment_product_per_market_details.xml" value="0.22" />
         <entry key="..\:/Users/anbca/OneDrive/Escritorio/UTN/Mobile/ComparaCompra/app/src/main/res/layout/fragment_profile.xml" value="0.14583333333333334" />
         <entry key="..\:/Users/anbca/OneDrive/Escritorio/UTN/Mobile/ComparaCompra/app/src/main/res/layout/fragment_scanner.xml" value="0.14583333333333334" />
-        <entry key="..\:/Users/anbca/OneDrive/Escritorio/UTN/Mobile/ComparaCompra/app/src/main/res/menu/bottom_nav_menu.xml" value="0.2" />
+        <entry key="..\:/Users/matias/Desktop/ComparaCompra/ComparaCompra/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.1935" />
+        <entry key="..\:/Users/matias/Desktop/ComparaCompra/ComparaCompra/app/src/main/res/layout/fragment_carts.xml" value="0.29144981412639404" />
       </map>
     </option>
   </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.29144981412639404" />
+      </ProjectState>
+    </option>
   </component>
 </project>

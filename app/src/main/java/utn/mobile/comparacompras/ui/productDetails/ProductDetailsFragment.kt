@@ -87,8 +87,8 @@ class ProductDetailsFragment : Fragment() {
         /*
         //TODO: Para testear, después borrar
         var carrito = Cart(1, "carrito", emptyList())
-        dbCart.insertCart(carrito)
-        cartsList = dbCart.getCarts()*/
+        dbCart.insertCart(carrito)*/
+        cartsList = dbCart.getCarts()
         controlAddToCart()
     }
 

@@ -156,14 +156,14 @@ public class DbCart extends DbHelper {
         return correct;
     }
 
-    public boolean editCartName(int id, String name) {
+    public boolean editCartName(long id, String newName) {
 
         boolean correct;
 
         DbHelper dbHelper = new DbHelper(context);
 
         try (SQLiteDatabase db = dbHelper.getWritableDatabase()) {
-            db.execSQL("UPDATE " + TABLE_CARTS + " SET name = '" + name + "' WHERE id='" + id);
+            db.execSQL("UPDATE " + TABLE_CARTS + " SET name = '" + newName + "' WHERE id = '" + id + "'");
             correct = true;
         } catch (Exception ex) {
             ex.toString();
@@ -173,7 +173,7 @@ public class DbCart extends DbHelper {
         return correct;
     }
 
-    public boolean deleteCart(int id) {
+    public boolean deleteCart(long id) {
 
         boolean correct;
 

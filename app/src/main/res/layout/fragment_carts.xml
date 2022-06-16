@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.carts.CartsFragment">
 
     <LinearLayout
@@ -29,6 +30,19 @@
             android:src="@drawable/ic_outline_search_24" />
 
     </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="70dp"
+        android:src="@drawable/ic_baseline_add_24"
+        app:fabSize="normal"
+        app:elevation="6dp"
+        android:id="@+id/floating"
+        android:contentDescription="floating_button" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvCarts"

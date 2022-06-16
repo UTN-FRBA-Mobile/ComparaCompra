@@ -41,7 +41,6 @@ public class ProductController
     @RequestMapping(value = "/search", method = RequestMethod.GET)
     public ResponseEntity<List<ProductXMarket>> getProducts(@RequestParam(name = "idList") List<Integer> idList)
     {
-        System.out.println("hola");
         List<ProductXMarket> products = productService.getProducts(idList.stream().map(e -> e.longValue()).collect(Collectors.toList()));
         return new ResponseEntity<>(products, HttpStatus.OK);
     }

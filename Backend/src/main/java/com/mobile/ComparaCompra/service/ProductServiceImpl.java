@@ -21,19 +21,20 @@ public class ProductServiceImpl implements ProductService
     {
         Product productA = new Product(1,"Galletitas Oreo 118 Gr.", "https://ardiaprod.vteximg.com.br/arquivos/ids/223498-1000-1000/Galletitas-Oreo-118-Gr-_1.jpg?v=637861404024700000", "111111111");
         Product productB = new Product(2,"Papas fritas DIA Original 150 Gr.", "https://ardiaprod.vteximg.com.br/arquivos/ids/220181-1000-1000/Papas-Fritas-Tubo-DIA-Sabor-Original-150-Gr-_1.jpg?v=637793946215730000", "222222222");
+
         ProductXMarket AA = new ProductXMarket(productA,1,50,"https://images.rappi.com.ar/marketplace/coto-1599858972.png?d=200x200&e=webp", 0);
         ProductXMarket AB = new ProductXMarket(productA,2,60,"http://assets.stickpng.com/thumbs/5a0c729d9642de34b6b65cec.png", 0);
-        ProductXMarket AC = new ProductXMarket(productA,3,30,"http://assets.stickpng.com/images/5a0c72729642de34b6b65ce7.png", 0);
-        ProductXMarket AC2 = new ProductXMarket(productA,3,30,"http://assets.stickpng.com/images/5a0c72729642de34b6b65ce7.png", 0);
-        ProductXMarket AC3 = new ProductXMarket(productA,3,30,"http://assets.stickpng.com/images/5a0c72729642de34b6b65ce7.png", 0);
-        ProductXMarket AC4 = new ProductXMarket(productA,3,30,"http://assets.stickpng.com/images/5a0c72729642de34b6b65ce7.png", 0);
-        ProductXMarket AB2 = new ProductXMarket(productB,2,70,"http://assets.stickpng.com/thumbs/5a0c729d9642de34b6b65cec.png", 0);
+        ProductXMarket AC = new ProductXMarket(productA,3,70,"http://assets.stickpng.com/images/5a0c72729642de34b6b65ce7.png", 0);
 
-        Market marketA = new Market(1,"coto","https://images.rappi.com.ar/marketplace/coto-1599858972.png?d=200x200&e=webp", -130.0, 40.0, List.of(AA));
-        Market marketB = new Market(2,"dia","http://assets.stickpng.com/thumbs/5a0c729d9642de34b6b65cec.png", -300.0, 50.0, List.of(AB, AB2));
-        Market marketC = new Market(3,"carrefour","http://assets.stickpng.com/images/5a0c72729642de34b6b65ce7.png", 150.0, 40.0, List.of(AC));
+        ProductXMarket BA = new ProductXMarket(productB,1,70,"https://images.rappi.com.ar/marketplace/coto-1599858972.png?d=200x200&e=webp", 0);
+        ProductXMarket BB = new ProductXMarket(productB,2,40,"http://assets.stickpng.com/thumbs/5a0c729d9642de34b6b65cec.png", 0);
+        ProductXMarket BC = new ProductXMarket(productB,3,30,"http://assets.stickpng.com/images/5a0c72729642de34b6b65ce7.png", 0);
 
-        productList = List.of(AA,AB,AB2,AC,AC2,AC3,AC4);
+        Market marketA = new Market(1,"coto","https://images.rappi.com.ar/marketplace/coto-1599858972.png?d=200x200&e=webp", -130.0, 40.0, List.of(AA, BA));
+        Market marketB = new Market(2,"dia","http://assets.stickpng.com/thumbs/5a0c729d9642de34b6b65cec.png", -300.0, 50.0, List.of(AB, BB));
+        Market marketC = new Market(3,"carrefour","http://assets.stickpng.com/images/5a0c72729642de34b6b65ce7.png", 150.0, 40.0, List.of(AC, BC));
+
+        productList = List.of(AA,AB,AC, BA, BB, BC);
         marketList = List.of(marketA, marketB, marketC);
     }
 

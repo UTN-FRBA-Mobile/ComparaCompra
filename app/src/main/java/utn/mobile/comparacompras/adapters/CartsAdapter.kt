@@ -16,7 +16,7 @@ import utn.mobile.comparacompras.domain.Cart
 import java.lang.Exception
 
 
-class CartsAdapter(private val cartList: List<Cart>) : RecyclerView.Adapter<CartsAdapter.MyViewHolder>()
+class CartsAdapter(private var cartList: List<Cart>) : RecyclerView.Adapter<CartsAdapter.MyViewHolder>()
 {
         private lateinit var mCtx: Context
         private lateinit var mResources: Resources
@@ -38,7 +38,7 @@ class CartsAdapter(private val cartList: List<Cart>) : RecyclerView.Adapter<Cart
             val cart: Cart = cartList[position]
             holder.view.findViewById<TextView>(R.id.text_cartName).text = cart.name
             val imageButton = holder.view.findViewById<ImageButton>(R.id.menuButton)
-            val dropDownMenu = createCartDropdownMenu(imageButton, cart)
+            val dropDownMenu = createCartDropdownMenu(imageButton, cart, position, holder)
 
             holder.view.findViewById<ImageButton>(R.id.menuButton).setOnClickListener {
                 dropDownMenu.show();
@@ -57,7 +57,7 @@ class CartsAdapter(private val cartList: List<Cart>) : RecyclerView.Adapter<Cart
             }
         }
 
-    private fun createCartDropdownMenu(imageButton: ImageButton, cart: Cart): PopupMenu {
+    private fun createCartDropdownMenu(imageButton: ImageButton, cart: Cart, position: Int, holder: MyViewHolder): PopupMenu {
         val dropDownMenu = PopupMenu(mCtx, imageButton);
         val menu : Menu = dropDownMenu.menu;
         menu.add(0, 0, 0, mResources.getString(R.string.menu_item_borrar));
@@ -75,6 +75,8 @@ class CartsAdapter(private val cartList: List<Cart>) : RecyclerView.Adapter<Cart
                             print(dialog)
                             print(id)
                             dbCart.deleteCart(cart.id)
+                            cartList = cartList.filter { c -> c.id != cart.id }
+                            notifyItemRemoved(position)
                         }
                         .setNegativeButton(mResources.getString(R.string.cancelar), null)
 
@@ -110,6 +112,8 @@ class CartsAdapter(private val cartList: List<Cart>) : RecyclerView.Adapter<Cart
                             print(id)
                             val cartName = edittext.text.toString()
                             dbCart.editCartName(cart.id, cartName)
+                            cartList[position].name = cartName
+                            holder.view.findViewById<TextView>(R.id.text_cartName).text = cartName
                         }
                         .setNegativeButton(mResources.getString(R.string.cancelar), null)
 

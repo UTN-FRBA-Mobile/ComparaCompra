@@ -75,7 +75,6 @@ class CartProductsFragment : Fragment()
 
         if(productList!!.isNotEmpty())
         {
-            println(productList!!.toList())
             val apiInterface = ApiInterface.create().getCartProducts(productList!!.toList())
 
             apiInterface.enqueue( object : Callback<List<ProductMarketResponse>>
@@ -91,6 +90,17 @@ class CartProductsFragment : Fragment()
                             layoutManager = viewManager
                             adapter = viewAdapter
                         }
+
+                        var totals = mutableListOf<Pair<String, Double>>()
+
+                        var products = response.body()
+                        products!!.distinctBy { p -> p.imageUrl }.map{ p -> p.imageUrl}.forEach { m ->
+                            val pair = Pair<String, Double>(m, products.filter { p -> p.imageUrl == m }.sumOf { p -> p.price.toDouble() })
+                            totals.add(pair)
+                        }
+
+                        println(totals)
+
                     }
                 }
 

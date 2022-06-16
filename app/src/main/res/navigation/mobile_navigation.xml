@@ -9,7 +9,11 @@
         android:id="@+id/navigation_carts"
         android:name="utn.mobile.comparacompras.ui.carts.CartsFragment"
         android:label="@string/title_carts"
-        tools:layout="@layout/fragment_carts" />
+        tools:layout="@layout/fragment_carts" >
+        <action
+            android:id="@+id/action_navigation_carts_to_cartProductsFragment"
+            app:destination="@id/cartProductsFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_search"
@@ -52,6 +56,9 @@
         <action
             android:id="@+id/action_productDetailsFragment_to_navigation_search"
             app:destination="@id/navigation_search" />
+        <action
+            android:id="@+id/action_productDetailsFragment_to_cartProductsFragment"
+            app:destination="@id/cartProductsFragment" />
     </fragment>
     <fragment
         android:id="@+id/productFragment2"
@@ -62,5 +69,17 @@
         android:name="utn.mobile.comparacompras.ui.map.MapsFragment"
         android:label="Map"
         tools:layout="@layout/fragment_maps" />
+    <fragment
+        android:id="@+id/cartProductsFragment"
+        android:name="utn.mobile.comparacompras.ui.carts.products.CartProductsFragment"
+        android:label="@string/title_cart"
+        tools:layout="@layout/fragment_cart_products">
+        <action
+            android:id="@+id/action_cartProductsFragment_to_navigation_carts"
+            app:destination="@id/navigation_carts" />
+        <action
+            android:id="@+id/action_cartProductsFragment_to_productDetailsFragment"
+            app:destination="@id/productDetailsFragment" />
+    </fragment>
 
 </navigation>

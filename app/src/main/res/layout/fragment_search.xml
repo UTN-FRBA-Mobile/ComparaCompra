@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.search.SearchFragment">
+    tools:context=".ui.search.SearchFragment"
+    android:animateLayoutChanges="true">
 
     <ImageView
         android:contentDescription="@string/logo_de_comparacompra"
@@ -25,22 +26,24 @@
         android:textAlignment="center"
         android:textColor="@color/logoCyan"
         android:textSize="30sp"
-        android:visibility="visible"/>
+        android:visibility="visible"
+        android:paddingBottom="5dp"/>
 
     <LinearLayout
         android:id="@+id/search_bar"
-        android:layout_width="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/text_logo"
-        android:paddingLeft="30dp"
-        android:paddingRight="30dp">
+        android:background="@drawable/border">
 
         <ImageButton
             android:contentDescription="@string/boton_para_camara"
             android:id="@+id/camera_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_outline_camera_alt_24" />
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:src="@drawable/ic_outline_camera_alt_24"
+            android:background="@drawable/border"/>
 
         <EditText
             android:inputType="text"
@@ -54,9 +57,10 @@
         <ImageButton
             android:contentDescription="@string/boton_de_busqueda"
             android:id="@+id/search_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_outline_search_24" />
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:src="@drawable/ic_outline_search_24"
+            android:background="@drawable/border"/>
 
     </LinearLayout>
 

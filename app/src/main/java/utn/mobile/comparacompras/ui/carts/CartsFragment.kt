@@ -24,7 +24,8 @@ import utn.mobile.comparacompras.db.DbCart
 import utn.mobile.comparacompras.domain.Cart
 
 
-class CartsFragment : Fragment() {
+class CartsFragment : Fragment()
+{
 
     private var _binding: FragmentCartsBinding? = null
 
@@ -98,29 +99,6 @@ class CartsFragment : Fragment() {
             layoutManager = viewManager
             adapter = viewAdapter
         }
-        /*
-        val apiInterface = ApiInterface.create().getCartsByUserAndName(1, binding.textSearch.text.toString())
-
-        apiInterface.enqueue( object : Callback<List<CartResponse>> {
-            override fun onResponse(call: Call<List<CartResponse>>?, response: Response<List<CartResponse>>?) {
-
-                if(response?.body() != null)
-                {
-                    val viewManager = LinearLayoutManager(context)
-                    val viewAdapter = CartsAdapter(response.body()!!.distinctBy { p -> p.id })
-
-                    recyclerView = binding.rvCarts.apply{
-                        layoutManager = viewManager
-                        adapter = viewAdapter
-                    }
-                }
-            }
-
-            override fun onFailure(call: Call<List<CartResponse>>?, t: Throwable?)
-            {
-                Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
-            }
-        })*/
     }
 
     override fun onDestroyView() {

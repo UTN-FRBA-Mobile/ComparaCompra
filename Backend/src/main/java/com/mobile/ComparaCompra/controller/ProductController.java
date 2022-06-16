@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.websocket.server.PathParam;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
+@CrossOrigin
 @Slf4j
 @RequestMapping("/product")
 public class ProductController
@@ -34,5 +36,13 @@ public class ProductController
     {
         List<ProductXMarket> productMarkets = productService.getProduct(id, lat, lon, maxDistance);
         return new ResponseEntity<>(productMarkets, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/search", method = RequestMethod.GET)
+    public ResponseEntity<List<ProductXMarket>> getProducts(@RequestParam(name = "idList") List<Integer> idList)
+    {
+        System.out.println("hola");
+        List<ProductXMarket> products = productService.getProducts(idList.stream().map(e -> e.longValue()).collect(Collectors.toList()));
+        return new ResponseEntity<>(products, HttpStatus.OK);
     }
 }

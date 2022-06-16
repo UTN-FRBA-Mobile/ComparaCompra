@@ -59,6 +59,8 @@ class SearchFragment : Fragment(R.layout.fragment_search)
         val searchButton = binding.searchButton
 
         searchButton.setOnClickListener {
+            binding.imageViewLogo.visibility = View.GONE
+            binding.textLogo.visibility = View.GONE
             binding.rvProducts.visibility = View.VISIBLE
             getAllProducts()
         }

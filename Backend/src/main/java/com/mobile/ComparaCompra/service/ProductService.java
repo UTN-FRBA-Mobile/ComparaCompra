@@ -8,4 +8,5 @@ public interface ProductService
 {
     List<ProductXMarket> getAllProducts(String productName);
     List<ProductXMarket> getProduct(long idProduct, double lat, double lon, double maxDistance);
+    List<ProductXMarket> getProducts(List<Long> idProductList);
 }

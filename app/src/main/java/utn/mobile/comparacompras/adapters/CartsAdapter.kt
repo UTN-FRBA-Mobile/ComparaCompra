@@ -2,11 +2,13 @@ package utn.mobile.comparacompras.adapters
 import android.app.AlertDialog
 import android.content.Context
 import android.content.res.Resources
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import utn.mobile.comparacompras.R
 import utn.mobile.comparacompras.db.DbCart
@@ -37,8 +39,21 @@ class CartsAdapter(private val cartList: List<Cart>) : RecyclerView.Adapter<Cart
             holder.view.findViewById<TextView>(R.id.text_cartName).text = cart.name
             val imageButton = holder.view.findViewById<ImageButton>(R.id.menuButton)
             val dropDownMenu = createCartDropdownMenu(imageButton, cart)
+
             holder.view.findViewById<ImageButton>(R.id.menuButton).setOnClickListener {
                 dropDownMenu.show();
+            }
+
+            holder.itemView.setOnClickListener {
+
+                val action = R.id.action_navigation_carts_to_cartProductsFragment
+                val productList = cartList[position].productList.map { p -> p.id.toInt() }.toIntArray()
+                val bundle = Bundle()
+                bundle.putIntArray("productList", productList)
+                bundle.putString("cartName", cart.name)
+                bundle.putLong("cartId", cart.id)
+
+                holder.itemView.findNavController().navigate(action, bundle)
             }
         }
 

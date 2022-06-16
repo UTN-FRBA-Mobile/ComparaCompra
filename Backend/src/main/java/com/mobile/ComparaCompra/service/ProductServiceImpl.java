@@ -59,4 +59,10 @@ public class ProductServiceImpl implements ProductService
         return productXMarketsList;
     }
 
+    @Override
+    public List<ProductXMarket> getProducts(List<Long> idProductList)
+    {
+        return productList.stream().filter(p -> idProductList.contains(p.getProduct().getId())).collect(Collectors.toList());
+    }
+
 }

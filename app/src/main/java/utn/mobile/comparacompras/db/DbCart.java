@@ -10,6 +10,8 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import utn.mobile.comparacompras.domain.Cart;
 import utn.mobile.comparacompras.domain.Product;
@@ -19,6 +21,7 @@ public class DbCart extends DbHelper {
     Context context;
     public DbCart(@Nullable Context context) {
         super(context);
+        this.context = context;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -71,13 +74,14 @@ public class DbCart extends DbHelper {
                 cart = new Cart();
                 cart.setId(cartCursor.getInt(0));
                 cart.setName(cartCursor.getString(1));
+                cart.setProductList(new ArrayList<>());
                 Cursor productCursor = db.rawQuery("SELECT * FROM " + TABLE_PRODUCTXCART + " WHERE cartId = " +cart.getId(), null);
-                if (cartCursor.moveToFirst()) {
+                if (productCursor.moveToFirst()) {
                     do {
                         Product product = new Product();
                         product.setId(productCursor.getInt(1));
-                        cart.getProductList().add(product);
-                    } while (cartCursor.moveToNext());
+                        cart.addProduct(product);
+                    } while (productCursor.moveToNext());
                 }
                 productCursor.close();
                 cartList.add(cart);
@@ -106,12 +110,12 @@ public class DbCart extends DbHelper {
             cart.setId(cartCursor.getInt(0));
             cart.setName(cartCursor.getString(1));
             Cursor productCursor = db.rawQuery("SELECT * FROM " + TABLE_PRODUCTXCART + " WHERE cartId = " +cart.getId(), null);
-            if (cartCursor.moveToFirst()) {
+            if (productCursor.moveToFirst()) {
                 do {
                     Product product = new Product();
                     product.setId(productCursor.getInt(1));
                     cart.getProductList().add(product);
-                } while (cartCursor.moveToNext());
+                } while (productCursor.moveToNext());
             }
             productCursor.close();
         }
@@ -121,14 +125,14 @@ public class DbCart extends DbHelper {
         return cart;
     }
 
-    public void addProductToCart(long cartId, Product product){
+    public void addProductToCart(long cartId, long productId){
         try {
             DbHelper dbHelper = new DbHelper(context);
             SQLiteDatabase db = dbHelper.getWritableDatabase();
 
             ContentValues values = new ContentValues();
             values.put("cartId", cartId);
-            values.put("productId", product.getId());
+            values.put("productId", productId);
 
             db.insert(TABLE_PRODUCTXCART, null, values);
 
@@ -138,12 +142,12 @@ public class DbCart extends DbHelper {
         }
     }
 
-    public boolean  deleteProductFromCart(Long cartId, Product product){
+    public boolean  deleteProductFromCart(Long cartId, Long productId){
         boolean correct;
         DbHelper dbHelper = new DbHelper(context);
 
         try (SQLiteDatabase db = dbHelper.getWritableDatabase()) {
-            db.execSQL("DELETE FROM " + TABLE_PRODUCTXCART + " WHERE cartId = " + cartId + " AND productId = " + product.getId());
+            db.execSQL("DELETE FROM " + TABLE_PRODUCTXCART + " WHERE cartId = " + cartId + " AND productId = " + productId);
             correct = true;
         } catch (Exception ex) {
             ex.toString();

@@ -16,19 +16,21 @@ import com.squareup.picasso.Picasso
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import utn.mobile.comparacompras.adapters.ApiInterface
-import utn.mobile.comparacompras.adapters.ProductMarketResponse
-import utn.mobile.comparacompras.adapters.ProductsPerMarketAdapter
+import utn.mobile.comparacompras.adapters.*
 import utn.mobile.comparacompras.databinding.FragmentProductDetailsBinding
+import utn.mobile.comparacompras.db.DbCart
+import utn.mobile.comparacompras.db.DbHelper
+import utn.mobile.comparacompras.domain.Cart
 import utn.mobile.comparacompras.utils.User
-import java.lang.Exception
 
 
 class ProductDetailsFragment : Fragment() {
 
     private var _binding: FragmentProductDetailsBinding? = null
     private lateinit var recyclerView: RecyclerView
-
+    private lateinit var cartsList: MutableList<Cart>
+    private var scannedValue: String? = null
+    private lateinit var dbCart: DbCart
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
@@ -42,9 +44,10 @@ class ProductDetailsFragment : Fragment() {
         _binding = FragmentProductDetailsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val scannedValue = arguments?.getString("productId")
+        scannedValue = arguments?.getString("productId")
 
         val apiInterface = ApiInterface.create().getProduct(scannedValue!!.toLong(), User.latitude, User.longitude, User.maxDistance)
+        dbCart = DbCart(context)
 
         apiInterface.enqueue( object : Callback<List<ProductMarketResponse>>
         {
@@ -74,14 +77,30 @@ class ProductDetailsFragment : Fragment() {
             }
         })
 
+        controllAddProductToCartButton()
+
+        return root
+    }
+
+    private fun controllAddProductToCartButton()
+    {
+        /*
+        //TODO: Para testear, después borrar
+        var carrito = Cart(1, "carrito", emptyList())
+        dbCart.insertCart(carrito)
+        cartsList = dbCart.getCarts()*/
+        controlAddToCart()
+    }
+
+    private fun controlAddToCart()
+    {
         val addToCartButton = binding.addToCartButton
-        val carts = arrayOf<CharSequence>("Carrito 1", "Carrito 2", "Carrito 3")
-        var selectedCart = carts[0]
-        print(selectedCart)
+        //val carts = arrayOf<CharSequence>("Carrito 1", "Carrito 2", "Carrito 3")
+        var selectedCart = cartsList[0]
         val ad: ArrayAdapter<*> = ArrayAdapter<Any?>(
             requireContext(),
             android.R.layout.simple_spinner_item,
-            carts
+            cartsList.map { cart -> cart.name }
         )
         ad.setDropDownViewResource(
             android.R.layout
@@ -100,7 +119,7 @@ class ProductDetailsFragment : Fragment() {
                     position: Int,
                     id: Long
                 ) {
-                    selectedCart = carts[position]
+                    selectedCart = cartsList[position]
                 }
 
                 override fun onNothingSelected(p0: AdapterView<*>?) {
@@ -111,9 +130,9 @@ class ProductDetailsFragment : Fragment() {
             b.setTitle("Elegir Carrito")
                 .setPositiveButton("Aceptar"
                 ) { dialog, id ->
-                    print(dialog)
-                    print(id)
-                    // selectedCart.addProduct(product)
+
+                    dbCart.addProductToCart(selectedCart.id, scannedValue!!.toLong())
+
                 }
                 .setNegativeButton("Cancelar",null)
 
@@ -121,8 +140,6 @@ class ProductDetailsFragment : Fragment() {
             b.create().show()
 
         }
-
-        return root
     }
 
     override fun onDestroyView() {

@@ -7,6 +7,12 @@ public class Cart {
     String name;
     List<Product> productList;
 
+    public Cart(long id, String name, List<Product> productList) {
+        this.id = id;
+        this.name = name;
+        this.productList = productList;
+    }
+
     public Cart(){}
 
     public long getId() {
@@ -31,5 +37,9 @@ public class Cart {
 
     public void setProductList(List<Product> productList) {
         this.productList = productList;
+    }
+
+    public void addProduct(Product product) {
+        this.productList.add(product);
     }
 }

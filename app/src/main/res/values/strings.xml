@@ -41,6 +41,7 @@
     <string name="title_renombrar_carrito">Renombrar carrito</string>
     <string name="aceptar">Aceptar</string>
     <string name="cancelar">Cancelar</string>
+    <string name="cantidad">Cantidad</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

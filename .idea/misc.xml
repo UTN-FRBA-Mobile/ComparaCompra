@@ -5,11 +5,16 @@
       <map>
         <entry key="..\:/Documentos/UTN/2022/Mobile/ComparaCompra/app/src/main/res/drawable/border.xml" value="0.32" />
         <entry key="..\:/Documentos/UTN/2022/Mobile/ComparaCompra/app/src/main/res/drawable/gray_border.xml" value="0.163" />
+        <entry key="..\:/Documentos/UTN/2022/Mobile/ComparaCompra/app/src/main/res/drawable/gray_border_square.xml" value="0.208" />
         <entry key="..\:/Documentos/UTN/2022/Mobile/ComparaCompra/app/src/main/res/drawable/ic_outline_camera_alt_24.xml" value="0.163" />
+        <entry key="..\:/Documentos/UTN/2022/Mobile/ComparaCompra/app/src/main/res/drawable/ic_outline_delete_24.xml" value="0.208" />
+        <entry key="..\:/Documentos/UTN/2022/Mobile/ComparaCompra/app/src/main/res/drawable/ic_outline_search_24.xml" value="0.208" />
+        <entry key="..\:/Documentos/UTN/2022/Mobile/ComparaCompra/app/src/main/res/layout/custom_spinner_item.xml" value="0.36666666666666664" />
         <entry key="..\:/Documentos/UTN/2022/Mobile/ComparaCompra/app/src/main/res/layout/fragment_cart_product.xml" value="0.3574074074074074" />
         <entry key="..\:/Documentos/UTN/2022/Mobile/ComparaCompra/app/src/main/res/layout/fragment_cart_products.xml" value="0.36666666666666664" />
         <entry key="..\:/Documentos/UTN/2022/Mobile/ComparaCompra/app/src/main/res/layout/fragment_product.xml" value="0.36666666666666664" />
         <entry key="..\:/Documentos/UTN/2022/Mobile/ComparaCompra/app/src/main/res/layout/fragment_product_details.xml" value="0.36666666666666664" />
+        <entry key="..\:/Documentos/UTN/2022/Mobile/ComparaCompra/app/src/main/res/layout/simple_spinner_item.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/anbca/OneDrive/Escritorio/UTN/DMI/ComparaCompra/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/anbca/OneDrive/Escritorio/UTN/DMI/ComparaCompra/app/src/main/res/layout/fragment_carts.xml" value="0.2" />
         <entry key="..\:/Users/anbca/OneDrive/Escritorio/UTN/DMI/ComparaCompra/app/src/main/res/layout/fragment_product.xml" value="0.2" />

@@ -27,11 +27,9 @@ class MapsFragment : Fragment() {
     private lateinit var userPosition: LatLng
     private val callback = OnMapReadyCallback { googleMap ->
         googleMap.setOnMapClickListener(GoogleMap.OnMapClickListener { latLng ->
+            googleMap.clear()
             googleMap.addMarker(MarkerOptions().position(latLng))
-        })
-        googleMap.setOnMarkerClickListener(GoogleMap.OnMarkerClickListener { marker ->
-            marker.remove()
-            return@OnMarkerClickListener true
+            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 18f), 2000, null)
         })
         googleMap.addMarker(MarkerOptions().position(userPosition).title("Marker in Sydney"))
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(userPosition))

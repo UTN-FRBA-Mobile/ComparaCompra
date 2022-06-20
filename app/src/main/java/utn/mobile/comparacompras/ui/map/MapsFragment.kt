@@ -30,10 +30,11 @@ class MapsFragment : Fragment() {
             googleMap.clear()
             googleMap.addMarker(MarkerOptions().position(latLng))
             googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 18f), 2000, null)
+            userPosition = latLng
         })
         googleMap.addMarker(MarkerOptions().position(userPosition).title("Marker in Sydney"))
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(userPosition))
-        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(userPosition, 5f))
+        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(userPosition, 18f), 2000, null)
     }
 
     override fun onCreateView(

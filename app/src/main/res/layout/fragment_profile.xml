@@ -83,9 +83,9 @@
 
     <LinearLayout
         android:id="@+id/linearLayout2"
-        android:layout_width="match_parent"
-        android:layout_height="160dp"
-        android:layout_marginTop="10dp"
+        android:layout_width="293dp"
+        android:layout_height="172dp"
+        android:layout_marginTop="4dp"
         android:orientation="horizontal"
         android:paddingLeft="30dp"
         android:paddingRight="30dp"
@@ -93,15 +93,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
 
-        <ImageButton
-            android:id="@+id/mapsImageButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginStart="30dp"
-            android:backgroundTint="#000000"
-            android:contentDescription="@string/label_boton_mapa"
-            android:src="@android:drawable/ic_dialog_map" />
+        <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/tinyMap"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".ui.map.MapsFragment"
+            tools:layout="@layout/fragment_maps" />
+
+        <com.google.android.gms.maps.StreetViewPanoramaView
+            android:id="@+id/mapTinyView"
+            android:layout_width="351dp"
+            android:layout_height="174dp"
+            android:layout_weight="1"
+            tools:ignore="SpeakableTextPresentCheck">
+
+        </com.google.android.gms.maps.StreetViewPanoramaView>
 
     </LinearLayout>
 
@@ -127,6 +135,12 @@
             android:gravity="center|center_vertical"
             android:text="@string/label_distancia_maxima" />
 
+        <TextView
+            android:id="@+id/vistaCompleta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Vista Completa" />
+
         <EditText
             android:id="@+id/maxDistanceField"
             android:layout_width="match_parent"
@@ -149,6 +163,7 @@
             android:layout_weight="1.25"
             android:gravity="center"
             android:text="@string/label_unidad_km" />
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

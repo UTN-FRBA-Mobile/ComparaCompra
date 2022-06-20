@@ -15,7 +15,7 @@
         tools:context=".ui.map.MapsFragment"
         tools:layout="@layout/fragment_maps" />
 
-    <com.google.android.gms.maps.MapView
+    <com.google.android.gms.maps.StreetViewPanoramaView
         android:id="@+id/mapView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

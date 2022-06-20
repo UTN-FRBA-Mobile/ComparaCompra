@@ -1,15 +1,20 @@
 package utn.mobile.comparacompras.ui.map
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.GoogleMap
 import utn.mobile.comparacompras.R
 import utn.mobile.comparacompras.databinding.FragmentMapsBinding
 
@@ -21,8 +26,15 @@ class MapsFragment : Fragment() {
 
     private lateinit var userPosition: LatLng
     private val callback = OnMapReadyCallback { googleMap ->
+        googleMap.setOnMapClickListener(GoogleMap.OnMapClickListener { latLng ->
+            googleMap.addMarker(MarkerOptions().position(latLng))
+        })
+        googleMap.setOnMarkerClickListener(GoogleMap.OnMarkerClickListener { marker ->
+            marker.remove()
+            return@OnMarkerClickListener true
+        })
         googleMap.addMarker(MarkerOptions().position(userPosition).title("Marker in Sydney"))
-        //googleMap.moveCamera(CameraUpdateFactory.newLatLng(userPosition))
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(userPosition))
         googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(userPosition, 5f))
     }
 

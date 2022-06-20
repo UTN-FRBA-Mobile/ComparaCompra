@@ -4,21 +4,35 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.widget.addTextChangedListener
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import utn.mobile.comparacompras.R
+import utn.mobile.comparacompras.db.DbCart
+import utn.mobile.comparacompras.ui.carts.products.CartProductsFragment
 
-class CartProductsAdapter(private val productList: List<ProductMarketResponse>) : RecyclerView.Adapter<CartProductsAdapter.MyViewHolder>()
+class CartProductsAdapter(private var productList: List<ProductMarketResponse>,
+                          private var productMarketList: List<ProductMarketResponse>,
+                          private val cartId: Long,
+                          private val cartProductsFragment: CartProductsFragment) : RecyclerView.Adapter<CartProductsAdapter.MyViewHolder>()
 {
     class MyViewHolder(val view: View) : RecyclerView.ViewHolder(view)
+
+    private lateinit var dbCart: DbCart
+    private lateinit var customHolder: CartProductsAdapter.MyViewHolder
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartProductsAdapter.MyViewHolder
     {
         val view : View = LayoutInflater.from(parent.context).inflate(R.layout.fragment_cart_product, parent, false)
 
+        dbCart = DbCart(parent.context)
+
+        customHolder = CartProductsAdapter.MyViewHolder(view)
         return CartProductsAdapter.MyViewHolder(view)
     }
 
@@ -30,6 +44,9 @@ class CartProductsAdapter(private val productList: List<ProductMarketResponse>) 
         Picasso.get().load(productList[position].product.imageUrl).fit().into(productImageView)
 
         val product: ProductMarketResponse = productList[position]
+        holder.view.findViewById<EditText>(R.id.ammount).setText("1")
+
+        productMarketList.map { p -> p.price.toDouble() * customHolder.view.findViewById<EditText>(R.id.ammount).text.toString().toInt() }
 
         holder.itemView.setOnClickListener {
             val action = R.id.action_cartProductsFragment_to_productDetailsFragment
@@ -38,8 +55,46 @@ class CartProductsAdapter(private val productList: List<ProductMarketResponse>) 
             bundle.putString("productId", id.toString())
             holder.itemView.findNavController().navigate(action, bundle)
         }
+
+        holder.itemView.findViewById<ImageButton>(R.id.deleteCartProductButton).setOnClickListener {
+            dbCart.deleteProductFromCart(cartId, product.product.id)
+            productList = productList.filter { p -> p.product.id != product.product.id }
+            productMarketList = productMarketList.filter { p -> p.product.id != product.product.id }
+            notifyItemRemoved(position)
+        }
+
+        holder.itemView.findViewById<EditText>(R.id.ammount).addTextChangedListener { t ->
+            println(t)
+            if(t!!.isNotEmpty())
+            {
+                println(productMarketList.map { p -> p.price.toDouble() * t.toString().toInt() })
+                productMarketList.forEach {
+                    p -> p.price = p.price.toDouble() * t.toString().toInt()
+                }
+                cartProductsFragment.updateSpinner()
+            }
+        }
     }
 
     override fun getItemCount() = productList.size
+
+    fun getTotals(): MutableList<Pair<String, Double>>
+    {
+        var totals = mutableListOf<Pair<String, Double>>()
+
+        var products = productMarketList
+        products!!.distinctBy { p -> p.imageUrl }.map{ p -> p.imageUrl}.forEach { m ->
+            val pair = Pair<String, Double>(m, products.filter { p -> p.imageUrl == m }.sumOf { p -> p.price.toDouble() })
+            totals.add(pair)
+        }
+
+        println(totals)
+
+        return totals
+    }
+
+    override fun onDetachedFromRecyclerView(recyclerView: RecyclerView) {
+        super.onDetachedFromRecyclerView(recyclerView)
+    }
 
 }

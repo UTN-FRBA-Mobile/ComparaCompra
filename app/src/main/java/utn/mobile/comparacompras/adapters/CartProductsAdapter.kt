@@ -44,10 +44,11 @@ class CartProductsAdapter(private var productList: List<ProductMarketResponse>,
         Picasso.get().load(productList[position].product.imageUrl).fit().into(productImageView)
 
         val product: ProductMarketResponse = productList[position]
-        holder.view.findViewById<EditText>(R.id.ammount).setText("1")
+        var amount = dbCart.getAmountOfProductFromCart(cartId,product.product.id)
+        holder.view.findViewById<EditText>(R.id.ammount).setText(amount.toString())
 
         productMarketList.map { p -> p.price.toDouble() * customHolder.view.findViewById<EditText>(R.id.ammount).text.toString().toInt() }
-
+        cartProductsFragment.updateSpinner()
         holder.itemView.setOnClickListener {
             val action = R.id.action_cartProductsFragment_to_productDetailsFragment
             val id = product.product.id
@@ -67,6 +68,7 @@ class CartProductsAdapter(private var productList: List<ProductMarketResponse>,
             println(t)
             if(t!!.isNotEmpty())
             {
+                dbCart.editProductAmountOnCart(cartId, product.product.id, t.toString().toInt());
                 println(productMarketList.map { p -> p.price.toDouble() * t.toString().toInt() })
                 productMarketList.forEach {
                     p -> p.price = p.price.toDouble() * t.toString().toInt()

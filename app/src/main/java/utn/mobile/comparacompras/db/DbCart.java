@@ -44,6 +44,7 @@ public class DbCart extends DbHelper {
                 for (Product p : cart.getProductList()) {
                     values.put("productId", p.getId());
                     values.put("cartId", cart.getId());
+                    values.put("amount", p.getAmount());
                 }
 
                 id = db.insert(TABLE_PRODUCTXCART, null, values);
@@ -80,6 +81,7 @@ public class DbCart extends DbHelper {
                     do {
                         Product product = new Product();
                         product.setId(productCursor.getInt(1));
+                        product.setAmount(productCursor.getInt(2));
                         cart.addProduct(product);
                     } while (productCursor.moveToNext());
                 }
@@ -114,6 +116,7 @@ public class DbCart extends DbHelper {
                 do {
                     Product product = new Product();
                     product.setId(productCursor.getInt(1));
+                    product.setAmount(productCursor.getInt(2));
                     cart.getProductList().add(product);
                 } while (productCursor.moveToNext());
             }
@@ -125,7 +128,22 @@ public class DbCart extends DbHelper {
         return cart;
     }
 
-    public void addProductToCart(long cartId, long productId){
+    public int getAmountOfProductFromCart(long cartId, long productId){
+        DbHelper dbHelper = new DbHelper(context);
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        int amount = 0;
+
+        Cursor productCursor = db.rawQuery("SELECT * FROM " + TABLE_PRODUCTXCART + " WHERE cartId = " +cartId, null);
+        if (productCursor.moveToFirst()) {
+            amount = productCursor.getInt(2);
+        }
+        productCursor.close();
+
+        return amount;
+    }
+
+    public void addProductToCart(long cartId, long productId, int amount){
         try {
             DbHelper dbHelper = new DbHelper(context);
             SQLiteDatabase db = dbHelper.getWritableDatabase();
@@ -133,6 +151,7 @@ public class DbCart extends DbHelper {
             ContentValues values = new ContentValues();
             values.put("cartId", cartId);
             values.put("productId", productId);
+            values.put("amount", amount);
 
             db.insert(TABLE_PRODUCTXCART, null, values);
 
@@ -140,6 +159,23 @@ public class DbCart extends DbHelper {
         } catch (Exception ex) {
             ex.toString();
         }
+    }
+
+    public boolean editProductAmountOnCart(Long cartId, Long productId, int newAmount){
+        boolean correct;
+
+        DbHelper dbHelper = new DbHelper(context);
+
+        try (SQLiteDatabase db = dbHelper.getWritableDatabase()) {
+            db.execSQL("UPDATE " + TABLE_PRODUCTXCART + " SET amount = '" + newAmount + "' " +
+                    "WHERE productId = '" + productId + "' AND cartId = '" + cartId + "'");
+            correct = true;
+        } catch (Exception ex) {
+            ex.toString();
+            correct = false;
+        }
+
+        return correct;
     }
 
     public boolean  deleteProductFromCart(Long cartId, Long productId){

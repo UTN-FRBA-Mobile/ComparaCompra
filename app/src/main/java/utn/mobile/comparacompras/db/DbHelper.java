@@ -23,6 +23,7 @@ public class DbHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("CREATE TABLE " + TABLE_PRODUCTXCART + "(" +
                 "cartId int NOT NULL," +
                 "productId int NOT NULL," +
+                "amount int NOT NULL," +
                 "    CONSTRAINT PK_Person PRIMARY KEY (cartId,productId))"
         );
 

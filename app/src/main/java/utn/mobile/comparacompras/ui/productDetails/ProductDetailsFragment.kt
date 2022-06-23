@@ -131,7 +131,7 @@ class ProductDetailsFragment : Fragment() {
                 .setPositiveButton("Aceptar"
                 ) { dialog, id ->
 
-                    dbCart.addProductToCart(selectedCart.id, scannedValue!!.toLong())
+                    dbCart.addProductToCart(selectedCart.id, scannedValue!!.toLong(),1)
 
                 }
                 .setNegativeButton("Cancelar",null)

@@ -44,11 +44,16 @@ class CartProductsAdapter(private var productList: List<ProductMarketResponse>,
         Picasso.get().load(productList[position].product.imageUrl).fit().into(productImageView)
 
         val product: ProductMarketResponse = productList[position]
+
         var amount = dbCart.getAmountOfProductFromCart(cartId,product.product.id)
         holder.view.findViewById<EditText>(R.id.ammount).setText(amount.toString())
 
-        productMarketList.map { p -> p.price.toDouble() * customHolder.view.findViewById<EditText>(R.id.ammount).text.toString().toInt() }
+        productMarketList.forEach {
+                p -> p.totalPrice = p.price.toDouble() * amount
+        }
+
         cartProductsFragment.updateSpinner()
+
         holder.itemView.setOnClickListener {
             val action = R.id.action_cartProductsFragment_to_productDetailsFragment
             val id = product.product.id
@@ -69,10 +74,13 @@ class CartProductsAdapter(private var productList: List<ProductMarketResponse>,
             if(t!!.isNotEmpty())
             {
                 dbCart.editProductAmountOnCart(cartId, product.product.id, t.toString().toInt());
-                println(productMarketList.map { p -> p.price.toDouble() * t.toString().toInt() })
+
+                //println(productMarketList.map { p -> p.price.toDouble() * t.toString().toInt() })
+
                 productMarketList.forEach {
-                    p -> p.price = p.price.toDouble() * t.toString().toInt()
+                    p -> p.totalPrice = p.price.toDouble() * t.toString().toInt()
                 }
+
                 cartProductsFragment.updateSpinner()
             }
         }
@@ -85,8 +93,9 @@ class CartProductsAdapter(private var productList: List<ProductMarketResponse>,
         var totals = mutableListOf<Pair<String, Double>>()
 
         var products = productMarketList
+
         products!!.distinctBy { p -> p.imageUrl }.map{ p -> p.imageUrl}.forEach { m ->
-            val pair = Pair<String, Double>(m, products.filter { p -> p.imageUrl == m }.sumOf { p -> p.price.toDouble() })
+            val pair = Pair<String, Double>(m, products.filter { p -> p.imageUrl == m }.sumOf { p -> p.totalPrice.toDouble() })
             totals.add(pair)
         }
 

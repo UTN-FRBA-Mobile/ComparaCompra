@@ -23,6 +23,7 @@ import utn.mobile.comparacompras.adapters.ApiInterface
 import utn.mobile.comparacompras.adapters.UserResponse
 import utn.mobile.comparacompras.databinding.FragmentMapsBinding
 import utn.mobile.comparacompras.databinding.FragmentProfileBinding
+import utn.mobile.comparacompras.utils.User
 
 class ProfileFragment : Fragment() {
 
@@ -31,14 +32,12 @@ class ProfileFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
-    private var userLatitude : Double = 0.0
-    private var userLongitude : Double = 0.0
     var button: TextView? = null
 
     private val callback = OnMapReadyCallback { googleMap ->
-        googleMap.addMarker(MarkerOptions().position(LatLng(userLatitude, userLongitude)))
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(LatLng(userLatitude, userLongitude)))
-        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(userLatitude, userLongitude), 18f), 2000, null)
+        googleMap.addMarker(MarkerOptions().position(LatLng(User.latitude, User.longitude)))
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(LatLng(User.latitude, User.longitude)))
+        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(User.latitude, User.longitude), 18f), 2000, null)
     }
 
     override fun onCreateView(
@@ -54,7 +53,7 @@ class ProfileFragment : Fragment() {
         button = binding.vistaCompleta
         val root: View = binding.root
         button!!.setOnClickListener() {
-            val bundle = bundleOf("UserLatitude" to userLatitude, "UserLongitude" to userLongitude)
+            val bundle = bundleOf("UserLatitude" to User.latitude, "UserLongitude" to User.longitude)
             val action = R.id.action_navigation_notifications_to_mapsFragment
             findNavController().navigate(action, bundle)
         }
@@ -74,16 +73,17 @@ class ProfileFragment : Fragment() {
                     binding.userName.text = user.name;
                     binding.userAddress.setText(user.address)
                     binding.maxDistanceField.setText(user.maxDistance.toString())
-                    userLatitude = user.latitude
-                    userLongitude = user.longitude
-                    val mapView = childFragmentManager.findFragmentById(R.id.mapView) as SupportMapFragment?
+                    User.latitude = user.latitude
+                    User.longitude = user.longitude
+                    User.maxDistance = user.maxDistance
+                    val mapView = childFragmentManager.findFragmentById(R.id.tinyMap) as SupportMapFragment?
                     mapView?.getMapAsync(callback)
                 }
             }
 
             override fun onFailure(call: Call<UserResponse>?, t: Throwable?)
             {
-                //Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
             }
         })
     }

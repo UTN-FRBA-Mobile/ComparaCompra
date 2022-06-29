@@ -51,12 +51,9 @@ class ProductDetailsFragment : Fragment() {
 
         apiInterface.enqueue( object : Callback<List<ProductMarketResponse>>
         {
-            override fun onResponse(
-                call: Call<List<ProductMarketResponse>>,
-                response: Response<List<ProductMarketResponse>>
-            ) {
+            override fun onResponse(call: Call<List<ProductMarketResponse>>?, response: Response<List<ProductMarketResponse>>?) {
 
-                if(response.body() != null)
+                if (response?.body() != null)
                 {
                     binding.textProductName.text = response.body()!![0].product.name
                     Picasso.get().load(response.body()!![0].product.imageUrl).fit().into(binding.imageProductDetails)
@@ -96,7 +93,11 @@ class ProductDetailsFragment : Fragment() {
     {
         val addToCartButton = binding.addToCartButton
         //val carts = arrayOf<CharSequence>("Carrito 1", "Carrito 2", "Carrito 3")
-        var selectedCart = cartsList[0]
+        var selectedCart: Cart? = null
+        if (cartsList.size > 0)
+        {
+            selectedCart = cartsList[0]
+        }
         val ad: ArrayAdapter<*> = ArrayAdapter<Any?>(
             requireContext(),
             android.R.layout.simple_spinner_item,
@@ -131,7 +132,8 @@ class ProductDetailsFragment : Fragment() {
                 .setPositiveButton("Aceptar"
                 ) { dialog, id ->
 
-                    dbCart.addProductToCart(selectedCart.id, scannedValue!!.toLong(),1)
+                    if (selectedCart != null)
+                        dbCart.addProductToCart(selectedCart!!.id, scannedValue!!.toLong(),1)
 
                 }
                 .setNegativeButton("Cancelar",null)

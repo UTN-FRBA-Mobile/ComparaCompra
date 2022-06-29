@@ -27,9 +27,20 @@ class ProductsPerMarketAdapter(private val myDataset: List<ProductMarketResponse
             val productImageView: ImageView = holder.view.findViewById(R.id.imageMarket)
             Picasso.get().load(myDataset[position].imageUrl).fit().into(productImageView)
 
-            holder.view.findViewById<TextView>(R.id.text_distance).text = "${myDataset[position].distance.roundToInt()} mts"
+            holder.view.findViewById<TextView>(R.id.text_distance).text = formatDistance(myDataset[position].distance.roundToInt())
             holder.view.findViewById<TextView>(R.id.text_productPrice).text = "$${myDataset[position].price}"
         }
 
         override fun getItemCount() = myDataset.size
+
+        private fun formatDistance(distance: Int) : String{
+            var returnDistance = ""
+            if (distance < 1000)
+                returnDistance = "$distance mts"
+            else {
+                val distanceAsKm : Double = distance/1000.0
+                returnDistance = "${String.format("%.2f", distanceAsKm)} km"
+            }
+            return returnDistance
+        }
 }

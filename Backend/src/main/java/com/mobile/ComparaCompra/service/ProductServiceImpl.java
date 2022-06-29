@@ -30,9 +30,9 @@ public class ProductServiceImpl implements ProductService
         ProductXMarket BB = new ProductXMarket(productB,2,40,"http://assets.stickpng.com/thumbs/5a0c729d9642de34b6b65cec.png", 0);
         ProductXMarket BC = new ProductXMarket(productB,3,30,"http://assets.stickpng.com/images/5a0c72729642de34b6b65ce7.png", 0);
 
-        Market marketA = new Market(1,"coto","https://images.rappi.com.ar/marketplace/coto-1599858972.png?d=200x200&e=webp", -130.0, 40.0, List.of(AA, BA));
-        Market marketB = new Market(2,"dia","http://assets.stickpng.com/thumbs/5a0c729d9642de34b6b65cec.png", -300.0, 50.0, List.of(AB, BB));
-        Market marketC = new Market(3,"carrefour","http://assets.stickpng.com/images/5a0c72729642de34b6b65ce7.png", 150.0, 40.0, List.of(AC, BC));
+        Market marketA = new Market(1,"Coto","https://images.rappi.com.ar/marketplace/coto-1599858972.png?d=200x200&e=webp", -34.611946, -58.420885, List.of(AA, BA));
+        Market marketB = new Market(2,"Dia","http://assets.stickpng.com/thumbs/5a0c729d9642de34b6b65cec.png", -34.608950, -58.441479, List.of(AB, BB));
+        Market marketC = new Market(3,"Carrefour","http://assets.stickpng.com/images/5a0c72729642de34b6b65ce7.png", -34.611108, -58.460818, List.of(AC, BC));
 
         productList = List.of(AA,AB,AC, BA, BB, BC);
         marketList = List.of(marketA, marketB, marketC);

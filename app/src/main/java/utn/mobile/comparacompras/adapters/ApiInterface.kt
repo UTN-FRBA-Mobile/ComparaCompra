@@ -19,16 +19,13 @@ interface ApiInterface
     @GET("user/{id}")
     fun getUser(@Path("id") id: Long): Call<UserResponse>
 
-    @GET("cart/user/{id}")
-    fun getCartsByUserAndName(@Path("id") id: Long, @Query("cartName") cartName: String): Call<List<CartResponse>>
-
     @GET("product/search")
     fun getCartProducts(@Query("idList") idList: List<Int>): Call<List<ProductMarketResponse>>
 
     companion object {
 
-        //private var BASE_URL = "https://api-comparacompras.azurewebsites.net/"
-        private var BASE_URL = "http://10.0.2.2:8080/"
+        private var BASE_URL = "https://api-comparacompras.azurewebsites.net/"
+        //private var BASE_URL = "http://10.0.2.2:8080/"
 
         fun create() : ApiInterface
         {

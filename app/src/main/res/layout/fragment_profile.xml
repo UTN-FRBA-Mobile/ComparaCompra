@@ -121,9 +121,33 @@
         android:orientation="horizontal"
         android:paddingLeft="30dp"
         android:paddingRight="30dp"
+        app:layout_constraintBottom_toTopOf="@id/linearLayout5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+
+        <TextView
+            android:id="@+id/vistaCompleta"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/label_vista_completa"
+            android:textAlignment="center" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout5"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout4"
+        tools:layout_constraintTop_toBottomOf="@id/linearLayout4">
 
         <TextView
             android:id="@+id/labelMaxDistance"
@@ -135,12 +159,6 @@
             android:gravity="center|center_vertical"
             android:text="@string/label_distancia_maxima" />
 
-        <TextView
-            android:id="@+id/vistaCompleta"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Vista Completa" />
-
         <EditText
             android:id="@+id/maxDistanceField"
             android:layout_width="match_parent"
@@ -150,11 +168,11 @@
             android:layout_weight="1"
             android:ems="10"
             android:hint="@string/placeholder_max_distancia"
+            android:importantForAutofill="no"
             android:inputType="number"
             android:minHeight="48dp"
             android:textAlignment="center"
-            android:textColorHint="#757575"
-            android:importantForAutofill="no" />
+            android:textColorHint="#757575" />
 
         <TextView
             android:id="@+id/labelUnitOfLength"
@@ -163,7 +181,6 @@
             android:layout_weight="1.25"
             android:gravity="center"
             android:text="@string/label_unidad_km" />
-
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

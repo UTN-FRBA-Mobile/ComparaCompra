@@ -1,19 +1,16 @@
 package utn.mobile.comparacompras.ui.map
 
-import android.location.Address
-import android.location.Geocoder
-import android.location.Location
-import android.location.LocationListener
+import android.content.Context
+import android.content.res.Resources
 import android.os.Bundle
+import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
-import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
-import androidx.room.vo.Fields
-import com.android.volley.Response
-import com.google.android.gms.location.places.Place
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
@@ -22,13 +19,17 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.LocationBias
-import com.google.android.libraries.places.api.model.RectangularBounds
-import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRequest
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import utn.mobile.comparacompras.R
 import utn.mobile.comparacompras.databinding.FragmentMapsBinding
 import java.util.*
-import java.util.Arrays.asList
+import android.text.TextWatcher
+import android.widget.Adapter
+import android.widget.ListAdapter
+import android.widget.Spinner
+import androidx.appcompat.view.menu.MenuView
+import androidx.core.widget.addTextChangedListener
+import utn.mobile.comparacompras.adapters.CartsAdapter
+import kotlin.collections.ArrayList
 
 class MapsFragment : Fragment() {
 
@@ -59,20 +60,10 @@ class MapsFragment : Fragment() {
         var rectangularBounds: LocationBias? = null
 
         val searchBar: EditText = binding.textSearch
-        Places.initialize(requireContext(), "AIzaSyDzPZqoCT9VURs5p7s-9YxFNWyUkIl4390");
-        var placesClient = Places.createClient(requireContext());
-        var request = FindAutocompletePredictionsRequest.builder().setLocationBias(rectangularBounds).setQuery(searchBar.text.toString()).build();
-        placesClient.findAutocompletePredictions(request).addOnSuccessListener({ response: Response<Places> ->
-            for (prediction in response.getAutocompletePredictions()) {
-            Log.i(TAG, prediction.getPlaceId())
-            Log.i(TAG, prediction.getPrimaryText(null).toString())
-        }
-        placesClient.findAutocompletePredictions(request).addOnSuccessListener((response) -> {
-            for (AutocompletePrediction prediction : response.getAutocompletePredictions()) {
-                Log.i(TAG, prediction.getPlaceId());
-                Log.i(TAG, prediction.getPrimaryText(null).toString());
-            }
-        })
+        Places.initialize(requireContext(), getResources().getString("AIzaSyDzPZqoCT9VURs5p7s-9YxFNWyUkIl4390"));
+
+        searchBar.addTextChangedListener { text -> autocomplete(searchBar.text) }
+
         // Caso default: pongo la posicion de Sydney
         userPosition = LatLng(-34.0, 151.0)
 
@@ -84,9 +75,52 @@ class MapsFragment : Fragment() {
         return root
     }
 
+    private fun autocomplete(text: Editable?) {
+        var suggestions: ArrayList<PlacesAutoCompleteAdapter.PlaceAutocomplete> = ArrayList<PlacesAutoCompleteAdapter.PlaceAutocomplete>()
+        var mAutoCompleteAdapter = PlacesAutoCompleteAdapter(requireContext())
+        if (text != null) {
+            //suggestions = mAutoCompleteAdapter.getPredictions(text)
+            var addressSuggestions: ArrayList<String> = ArrayList<String>()
+            for (suggestion in suggestions) {
+                addressSuggestions.add(suggestion.address.toString())
+            }
+
+            var addressList: RecyclerView = binding.addressList
+            var adapter = MyListAdapter(requireContext(), addressSuggestions)
+            addressList.adapter = adapter
+        }
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(callback)
     }
+}
+
+class MyListAdapter(context: Context, list: ArrayList<String>):
+    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    lateinit var context: Context
+    lateinit var list: ArrayList<String>
+
+    init {
+        this.context = context
+        this.list = list
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        TODO("Not yet implemented")
+    }
+
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        TODO("Not yet implemented")
+    }
+
+    override fun getItemCount(): Int {
+        TODO("Not yet implemented")
+    }
+}
+
+private fun Resources.getString(s: String): String {
+    return "AIzaSyDzPZqoCT9VURs5p7s-9YxFNWyUkIl4390"
 }

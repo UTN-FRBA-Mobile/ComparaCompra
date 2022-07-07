@@ -25,9 +25,10 @@ public class ProductController
     ProductService productService;
 
     @RequestMapping(value = "/all", method = RequestMethod.GET)
-    public ResponseEntity<List<ProductXMarket>> getProducts(@RequestParam(required = false) String productName)
+    public ResponseEntity<List<ProductXMarket>> getProducts(@RequestParam(required = false) String productName
+            , @RequestParam(name = "lat") double lat, @RequestParam(name="lon") double lon, @RequestParam(name = "maxDistance") double maxDistance)
     {
-        List<ProductXMarket> allProducts = productService.getAllProducts(productName);
+        List<ProductXMarket> allProducts = productService.getAllProducts(productName, lat, lon, maxDistance);
         return new ResponseEntity<>(allProducts,HttpStatus.OK);
     }
 

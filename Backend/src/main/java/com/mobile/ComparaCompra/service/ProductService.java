@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ProductService
 {
-    List<ProductXMarket> getAllProducts(String productName);
+    List<ProductXMarket> getAllProducts(String productName, double lat, double lon, double maxDistance);
     List<ProductXMarket> getProduct(long idProduct, double lat, double lon, double maxDistance);
     List<ProductXMarket> getProducts(List<Long> idProductList);
 }

@@ -39,13 +39,18 @@ public class ProductServiceImpl implements ProductService
     }
 
     @Override
-    public List<ProductXMarket> getAllProducts(String productName)
+    public List<ProductXMarket> getAllProducts(String productName, double lat, double lon, double maxDistance)
     {
         if(productName == null)
         {
             return productList;
         }
-        return productList.stream().filter(p -> p.getProduct().getName().toUpperCase().contains(productName.toUpperCase()) || p.getProduct().getBarcode().toUpperCase().contains(productName.toUpperCase())).collect(Collectors.toList());
+        List<Long> closeMarkets = marketList.stream().filter(m -> m.getDistance(lat, lon) <= maxDistance).map(Market::getId).toList();
+        return productList.stream().filter(p ->
+                        p.getProduct().getName().toUpperCase().contains(productName.toUpperCase())
+                                || p.getProduct().getBarcode().toUpperCase().contains(productName.toUpperCase()))
+                .filter(p -> closeMarkets.contains(p.getIdMarket())).toList();
+
     }
 
     @Override

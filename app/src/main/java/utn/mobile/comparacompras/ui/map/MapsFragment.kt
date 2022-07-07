@@ -13,6 +13,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.GoogleMap
 import utn.mobile.comparacompras.R
 import utn.mobile.comparacompras.databinding.FragmentMapsBinding
+import utn.mobile.comparacompras.utils.User
 
 
 class MapsFragment : Fragment() {
@@ -27,6 +28,8 @@ class MapsFragment : Fragment() {
             googleMap.addMarker(MarkerOptions().position(latLng))
             googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 18f), 2000, null)
             userPosition = latLng
+            User.longitude = latLng.longitude
+            User.latitude = latLng.latitude
         })
         googleMap.addMarker(MarkerOptions().position(userPosition).title("Marker in Sydney"))
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(userPosition))

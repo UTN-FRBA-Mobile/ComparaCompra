@@ -10,7 +10,8 @@ import retrofit2.http.Query
 interface ApiInterface
 {
     @GET("product/all")
-    fun getAllProducts(@Query("productName") productName: String) : Call<List<ProductMarketResponse>>
+    fun getAllProducts(@Query("productName") productName: String, @Query("lat") lat: Double, @Query("lon") lon: Double,
+                       @Query("maxDistance") maxDistance: Double) : Call<List<ProductMarketResponse>>
 
     @GET("product/{id}")
     fun getProduct(@Path("id") id: Long, @Query("lat") lat: Double, @Query("lon") lon: Double,

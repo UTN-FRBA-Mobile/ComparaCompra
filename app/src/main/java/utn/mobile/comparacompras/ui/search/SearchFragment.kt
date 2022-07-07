@@ -19,6 +19,7 @@ import utn.mobile.comparacompras.adapters.ApiInterface
 import utn.mobile.comparacompras.adapters.ProductMarketResponse
 import utn.mobile.comparacompras.adapters.ProductsAdapter
 import utn.mobile.comparacompras.databinding.FragmentSearchBinding
+import utn.mobile.comparacompras.utils.User
 
 
 class SearchFragment : Fragment(R.layout.fragment_search)
@@ -74,7 +75,7 @@ class SearchFragment : Fragment(R.layout.fragment_search)
 
     private fun getAllProducts()
     {
-        val apiInterface = ApiInterface.create().getAllProducts(binding.textSearch.text.toString())
+        val apiInterface = ApiInterface.create().getAllProducts(binding.textSearch.text.toString(), User.latitude, User.longitude, User.maxDistance)
 
         apiInterface.enqueue( object : Callback<List<ProductMarketResponse>> {
             override fun onResponse(call: Call<List<ProductMarketResponse>>?, response: Response<List<ProductMarketResponse>>?) {

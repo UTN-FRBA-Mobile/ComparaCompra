@@ -45,11 +45,11 @@ public class ProductServiceImpl implements ProductService
         {
             return productList;
         }
-        List<Long> closeMarkets = marketList.stream().filter(m -> m.getDistance(lat, lon) <= maxDistance).map(Market::getId).toList();
+        List<Long> closeMarkets = marketList.stream().filter(m -> m.getDistance(lat, lon) <= maxDistance).map(Market::getId).collect(Collectors.toList());
         return productList.stream().filter(p ->
                         p.getProduct().getName().toUpperCase().contains(productName.toUpperCase())
                                 || p.getProduct().getBarcode().toUpperCase().contains(productName.toUpperCase()))
-                .filter(p -> closeMarkets.contains(p.getIdMarket())).toList();
+                .filter(p -> closeMarkets.contains(p.getIdMarket())).collect(Collectors.toList());
 
     }
 

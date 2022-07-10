@@ -101,46 +101,48 @@ class MainActivity : AppCompatActivity()
         val hasGps = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
         val hasNetwork = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
 
-        if (hasGps || hasNetwork)
-        {
-            if (hasGps)
+        if (!MyPreferences.isLocationConfigured(this)) {
+            if (hasGps || hasNetwork)
             {
-                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 3600000, 0F)
-                { p0 ->
-                    MyPreferences.setUserLongitude(this, p0.longitude)
-                    MyPreferences.setUserLatitude(this, p0.latitude)
-                    println("Lat: " + p0.latitude + " Lon: " + p0.longitude)
-                }
-                val localGpsLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
-                if (localGpsLocation != null)
+                if (hasGps)
                 {
-                    MyPreferences.setUserLongitude(this, localGpsLocation.longitude)
-                    MyPreferences.setUserLatitude(this, localGpsLocation.latitude)
-                    println("Lat: " + localGpsLocation.latitude + " Lon: " + localGpsLocation.longitude)
-                }
+                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 3600000, 0F)
+                    { p0 ->
+                        MyPreferences.setUserLongitude(this, p0.longitude)
+                        MyPreferences.setUserLatitude(this, p0.latitude)
+                        println("Lat: " + p0.latitude + " Lon: " + p0.longitude)
+                    }
+                    val localGpsLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+                    if (localGpsLocation != null)
+                    {
+                        MyPreferences.setUserLongitude(this, localGpsLocation.longitude)
+                        MyPreferences.setUserLatitude(this, localGpsLocation.latitude)
+                        println("Lat: " + localGpsLocation.latitude + " Lon: " + localGpsLocation.longitude)
+                    }
 
-            }
-            if (hasNetwork)
-            {
-                locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 3600000, 0F
-                ) { p0 ->
-                    MyPreferences.setUserLongitude(this, p0.longitude)
-                    MyPreferences.setUserLatitude(this, p0.latitude)
-                    println("Lat: " + p0.latitude + " Lon: " + p0.longitude)
                 }
-                val localNetworkLocation = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
-                if (localNetworkLocation != null)
+                if (hasNetwork)
                 {
-                    MyPreferences.setUserLongitude(this, localNetworkLocation.longitude)
-                    MyPreferences.setUserLatitude(this, localNetworkLocation.latitude)
-                    println("Lat: " + localNetworkLocation.latitude + " Lon: " + localNetworkLocation.longitude)
+                    locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 3600000, 0F
+                    ) { p0 ->
+                        MyPreferences.setUserLongitude(this, p0.longitude)
+                        MyPreferences.setUserLatitude(this, p0.latitude)
+                        println("Lat: " + p0.latitude + " Lon: " + p0.longitude)
+                    }
+                    val localNetworkLocation = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
+                    if (localNetworkLocation != null)
+                    {
+                        MyPreferences.setUserLongitude(this, localNetworkLocation.longitude)
+                        MyPreferences.setUserLatitude(this, localNetworkLocation.latitude)
+                        println("Lat: " + localNetworkLocation.latitude + " Lon: " + localNetworkLocation.longitude)
+                    }
                 }
             }
-        }
-        else {
-            MyPreferences.setUserLatitude(this, -34.603683)
-            MyPreferences.setUserLongitude(this, -58.381557)
-            println("Lat: " + "0" + " Lon: " + "0")
+            else {
+                MyPreferences.setUserLatitude(this, -34.603683)
+                MyPreferences.setUserLongitude(this, -58.381557)
+                println("Lat: " + "0" + " Lon: " + "0")
+            }
         }
         if (MyPreferences.getUserMaxDistance(this) == 0.0)
             MyPreferences.setUserMaxDistance(this, 0.5)

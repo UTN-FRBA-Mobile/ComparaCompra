@@ -24,15 +24,19 @@ object MyPreferences {
 
     fun getUserLatitude(context: Context): Double {
         var userLatitudeStr = getPreferences(context).getString(userLatitudeKey, "")
-        return userLatitudeStr?.toDouble() ?: 0.0
+        return userLatitudeStr?.toDoubleOrNull() ?: 0.0
     }
     fun getUserLongitude(context: Context): Double {
         var userLongitudeStr = getPreferences(context).getString(userLongitudeKey, "")
-        return userLongitudeStr?.toDouble() ?: 0.0
+        return userLongitudeStr?.toDoubleOrNull() ?: 0.0
     }
     fun getUserMaxDistance(context: Context): Double {
         var userMaxDistanceStr = getPreferences(context).getString(userMaxDistanceKey, "")
-        return userMaxDistanceStr?.toDouble() ?: 0.0
+        return userMaxDistanceStr?.toDoubleOrNull() ?: 0.0
+    }
+
+    fun isLocationConfigured(context: Context): Boolean {
+        return getUserMaxDistance(context) != 0.0 && getUserLongitude(context) != 0.0 && getUserLatitude(context) != 0.0
     }
 }
 

@@ -3,8 +3,6 @@ package utn.mobile.comparacompras
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageManager
-import android.location.Location
-import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Bundle
 import android.widget.Toast
@@ -18,7 +16,7 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import utn.mobile.comparacompras.databinding.ActivityMainBinding
-import utn.mobile.comparacompras.utils.User
+import utn.mobile.comparacompras.utils.MyPreferences
 
 class MainActivity : AppCompatActivity()
 {
@@ -109,15 +107,15 @@ class MainActivity : AppCompatActivity()
             {
                 locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 3600000, 0F)
                 { p0 ->
-                    User.longitude = p0.longitude
-                    User.latitude = p0.latitude
+                    MyPreferences.setUserLongitude(this, p0.longitude)
+                    MyPreferences.setUserLatitude(this, p0.latitude)
                     println("Lat: " + p0.latitude + " Lon: " + p0.longitude)
                 }
                 val localGpsLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
                 if (localGpsLocation != null)
                 {
-                    User.longitude = localGpsLocation.longitude
-                    User.latitude = localGpsLocation.latitude
+                    MyPreferences.setUserLongitude(this, localGpsLocation.longitude)
+                    MyPreferences.setUserLatitude(this, localGpsLocation.latitude)
                     println("Lat: " + localGpsLocation.latitude + " Lon: " + localGpsLocation.longitude)
                 }
 
@@ -126,23 +124,25 @@ class MainActivity : AppCompatActivity()
             {
                 locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 3600000, 0F
                 ) { p0 ->
-                    User.longitude = p0.longitude
-                    User.latitude = p0.latitude
+                    MyPreferences.setUserLongitude(this, p0.longitude)
+                    MyPreferences.setUserLatitude(this, p0.latitude)
                     println("Lat: " + p0.latitude + " Lon: " + p0.longitude)
                 }
                 val localNetworkLocation = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
                 if (localNetworkLocation != null)
                 {
-                    User.longitude = localNetworkLocation.longitude
-                    User.latitude = localNetworkLocation.latitude
+                    MyPreferences.setUserLongitude(this, localNetworkLocation.longitude)
+                    MyPreferences.setUserLatitude(this, localNetworkLocation.latitude)
                     println("Lat: " + localNetworkLocation.latitude + " Lon: " + localNetworkLocation.longitude)
                 }
             }
-        }else
-        {
-            User.longitude = 0.0
-            User.latitude = 0.0
+        }
+        else {
+            MyPreferences.setUserLatitude(this, -34.603683)
+            MyPreferences.setUserLongitude(this, -58.381557)
             println("Lat: " + "0" + " Lon: " + "0")
         }
+        if (MyPreferences.getUserMaxDistance(this) == 0.0)
+            MyPreferences.setUserMaxDistance(this, 0.5)
     }
 }

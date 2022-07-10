@@ -19,9 +19,8 @@ import retrofit2.Response
 import utn.mobile.comparacompras.adapters.*
 import utn.mobile.comparacompras.databinding.FragmentProductDetailsBinding
 import utn.mobile.comparacompras.db.DbCart
-import utn.mobile.comparacompras.db.DbHelper
 import utn.mobile.comparacompras.domain.Cart
-import utn.mobile.comparacompras.utils.User
+import utn.mobile.comparacompras.utils.MyPreferences
 
 
 class ProductDetailsFragment : Fragment() {
@@ -46,7 +45,8 @@ class ProductDetailsFragment : Fragment() {
 
         scannedValue = arguments?.getString("productId")
 
-        val apiInterface = ApiInterface.create().getProduct(scannedValue!!.toLong(), User.latitude, User.longitude, User.maxDistance)
+        val apiInterface = ApiInterface.create().getProduct(scannedValue!!.toLong(),
+            MyPreferences.getUserLatitude(requireContext()), MyPreferences.getUserLongitude(requireContext()), MyPreferences.getUserMaxDistance(requireContext()))
         dbCart = DbCart(context)
 
         apiInterface.enqueue( object : Callback<List<ProductMarketResponse>>

@@ -4,9 +4,9 @@ import android.content.Context
 import android.content.SharedPreferences
 
 object MyPreferences {
-    private val userLatitudeKey = "preference_user_latitude"
-    private val userLongitudeKey = "preference_user_longitude"
-    private val userMaxDistanceKey = "preference_user_max_distance"
+    private const val userLatitudeKey = "preference_user_latitude"
+    private const val userLongitudeKey = "preference_user_longitude"
+    private const val userMaxDistanceKey = "preference_user_max_distance"
 
     private fun getPreferences(context: Context): SharedPreferences {
         return context.getSharedPreferences("preferences", Context.MODE_PRIVATE)

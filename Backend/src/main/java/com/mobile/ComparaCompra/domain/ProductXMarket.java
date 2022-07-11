@@ -14,7 +14,7 @@ public class ProductXMarket
 {
     Product product;
     long idMarket;
-    long price;
+    double price;
     String imageUrl;
     double distance;
 }

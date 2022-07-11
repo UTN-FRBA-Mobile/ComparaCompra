@@ -68,7 +68,7 @@ class CartsFragment : Fragment()
             b.setTitle("Nombre del carrito")
             b.setView(edittext)
 
-            b.setPositiveButton("Yes Option",
+            b.setPositiveButton("Sí",
                 DialogInterface.OnClickListener { dialog, whichButton ->
 
                     val cartName = edittext.text.toString()
@@ -79,7 +79,7 @@ class CartsFragment : Fragment()
                     getCartsByUser()
 
                 })
-            b.setNegativeButton("No Option", null)
+            b.setNegativeButton("No", null)
 
             b.create().show()
 

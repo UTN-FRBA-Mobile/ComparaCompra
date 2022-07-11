@@ -145,6 +145,6 @@ class MainActivity : AppCompatActivity()
             }
         }
         if (MyPreferences.getUserMaxDistance(this) == 0.0)
-            MyPreferences.setUserMaxDistance(this, 0.5)
+            MyPreferences.setUserMaxDistance(this, 2.0)
     }
 }

@@ -46,7 +46,7 @@ class ProductDetailsFragment : Fragment() {
         scannedValue = arguments?.getString("productId")
 
         val apiInterface = ApiInterface.create().getProduct(scannedValue!!.toLong(),
-            MyPreferences.getUserLatitude(requireContext()), MyPreferences.getUserLongitude(requireContext()), MyPreferences.getUserMaxDistance(requireContext()))
+            MyPreferences.getUserLatitude(requireContext()), MyPreferences.getUserLongitude(requireContext()), MyPreferences.getUserMaxDistance(requireContext()) * 1000)
         dbCart = DbCart(context)
 
         apiInterface.enqueue( object : Callback<List<ProductMarketResponse>>

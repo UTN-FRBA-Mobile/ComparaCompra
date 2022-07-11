@@ -76,7 +76,7 @@ class SearchFragment : Fragment(R.layout.fragment_search)
     private fun getAllProducts()
     {
         val apiInterface = ApiInterface.create().getAllProducts(binding.textSearch.text.toString(), MyPreferences.getUserLatitude(requireContext()),
-            MyPreferences.getUserLongitude(requireContext()), MyPreferences.getUserMaxDistance(requireContext()))
+            MyPreferences.getUserLongitude(requireContext()), MyPreferences.getUserMaxDistance(requireContext()) * 1000)
 
         apiInterface.enqueue( object : Callback<List<ProductMarketResponse>> {
             override fun onResponse(call: Call<List<ProductMarketResponse>>?, response: Response<List<ProductMarketResponse>>?) {
